@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FD7 Garagem | Chaveiro 24h & Estética Automotiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Barlow Condensed', 'sans-serif'],
+          },
+          colors: {
+            fd7: {
+              black: '#09090B',
+              dark: '#121215',
+              card: '#18181B',
+              red: '#DC2626',
+              redHover: '#B91C1C',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-fd7-black text-zinc-100 font-sans antialiased selection:bg-fd7-red selection:text-white">
+
+  <!-- HEADER FIXO -->
+  <header class="fixed top-0 w-full z-50 bg-fd7-black/95 backdrop-blur-md border-b border-zinc-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-lg bg-fd7-red flex items-center justify-center font-display font-extrabold text-2xl italic tracking-tighter text-white shadow-lg shadow-red-600/20">
+          FD7
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-2xl leading-none tracking-wide uppercase">FD7 <span class="text-fd7-red">GARAGEM</span></span>
+          <span class="text-[10px] uppercase tracking-widest text-zinc-400">Chaveiro & Estética Automotiva</span>
+        </div>
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+        <a href="#chaveiro" class="hover:text-fd7-red transition">Chaveiro 24h</a>
+        <a href="#estetica" class="hover:text-fd7-red transition">Estética Automotiva</a>
+        <a href="#contato" class="hover:text-fd7-red transition">Contatos</a>
+      </nav>
+
+      <!-- CTA Emergência -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="https://wa.me/5511940732831?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20de%20Chaveiro%2024h%20da%20FD7!" target="_blank"
+           class="bg-fd7-red hover:bg-fd7-redHover text-white font-semibold text-sm px-5 py-2.5 rounded-lg flex items-center gap-2 transition shadow-lg shadow-red-600/25">
+          <i data-lucide="key-round" class="w-4 h-4"></i>
+          Chaveiro 24h
+        </a>
+      </div>
+
+      <!-- Botão Mobile -->
+      <button id="mobile-menu-btn" aria-label="Abrir Menu" class="md:hidden p-2 text-zinc-300 hover:text-white">
+        <i data-lucide="menu" class="w-7 h-7"></i>
+      </button>
+    </div>
+
+    <!-- Menu Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-fd7-dark border-b border-zinc-800 px-4 pt-2 pb-6 space-y-3">
+      <a href="#chaveiro" class="mobile-link block py-2 text-zinc-300 hover:text-fd7-red font-medium">Chaveiro 24h & Residencial</a>
+      <a href="#estetica" class="mobile-link block py-2 text-zinc-300 hover:text-fd7-red font-medium">Estética Automotiva</a>
+      <a href="#contato" class="mobile-link block py-2 text-zinc-300 hover:text-fd7-red font-medium">Contatos</a>
+      <a href="https://wa.me/5511940732831?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20de%20Chaveiro%2024h%20da%20FD7!" target="_blank"
+         class="w-full bg-fd7-red text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 mt-2">
+        <i data-lucide="phone-call" class="w-4 h-4"></i>
+        Emergência 24h: (11) 94073-2831
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION INTEGRADO COM OS 3 PILARES (OTIMIZADO PARA PC E CELULAR) -->
+  <section class="relative pt-20 overflow-hidden border-b border-zinc-800/80">
+    <div class="relative min-h-[78vh] lg:min-h-[82vh] flex flex-col justify-between">
+      
+      <!-- Grid de 3 Imagens de Fundo -->
+      <div class="absolute inset-0 z-0 grid grid-cols-1 md:grid-cols-3">
+        <div class="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 group">
+          <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=80" 
+               alt="Chaveiro Automotivo FD7" 
+               class="w-full h-full object-cover opacity-65 md:opacity-70 group-hover:opacity-85 group-hover:scale-105 transition duration-700" />
+        </div>
+        <div class="relative h-full overflow-hidden border-b md:border-b-0 md:border-r border-white/10 group">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=900&q=80" 
+               alt="Chaveiro Residencial FD7" 
+               class="w-full h-full object-cover opacity-60 md:opacity-65 group-hover:opacity-80 group-hover:scale-105 transition duration-700" />
+        </div>
+        <div class="relative h-full overflow-hidden group">
+          <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=900&q=80" 
+               alt="Estética Automotiva FD7" 
+               class="w-full h-full object-cover opacity-70 md:opacity-75 group-hover:opacity-90 group-hover:scale-105 transition duration-700" />
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-fd7-black via-fd7-black/75 md:via-fd7-black/65 to-fd7-black/45 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-fd7-black/90 via-fd7-black/40 to-transparent pointer-events-none"></div>
+      </div>
+
+      <div class="h-6 md:h-12"></div>
+
+      <!-- Texto principal ancorado diretamente no layout -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-16">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 text-fd7-red text-[11px] sm:text-xs font-extrabold uppercase tracking-[0.18em] mb-3 sm:mb-4">
+            <span class="w-2 h-2 rounded-full bg-fd7-red animate-pulse"></span>
+            Plantão Chaveiro 24h • Estética Automotiva
+          </div>
+          
+          <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl uppercase italic leading-[0.96] tracking-tight text-white mb-4 sm:mb-5 drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+            Cuidado extremo com o seu carro e <span class="text-fd7-red">agilidade</span> quando você mais precisa.
+          </h1>
+          
+          <p class="text-zinc-200 text-sm sm:text-xl leading-relaxed mb-7 sm:mb-8 max-w-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            Na <strong class="text-white">FD7 Garagem</strong>, unimos estética automotiva detalhada para deixar seu veículo novo de novo com atendimento emergencial 24 horas de chaveiro automotivo e residencial.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <a href="https://wa.me/5511940732831?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20FD7%20e%20gostaria%20de%20um%20or%C3%A7amento!" target="_blank"
+               class="bg-fd7-red hover:bg-fd7-redHover text-white font-bold px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl flex items-center justify-center gap-2.5 transition text-sm sm:text-base shadow-xl shadow-red-600/30">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              Solicitar Orçamento
+            </a>
+            <a href="#estetica"
+               class="bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/20 text-white font-semibold px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl flex items-center justify-center gap-2 transition text-sm sm:text-base">
+              Conhecer Serviços
+              <i data-lucide="arrow-down" class="w-4 h-4 text-fd7-red"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Faixa inferior integrada -->
+      <div class="relative z-10 border-t border-white/10 bg-fd7-black/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4 grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300">
+          <div class="flex items-center gap-2.5">
+            <span class="text-fd7-red font-display text-base">01</span>
+            <span>Chaveiro Automotivo & Codificação</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-fd7-red font-display text-base">02</span>
+            <span>Chaveiro Residencial & Aberturas 24h</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-fd7-red font-display text-base">03</span>
+            <span>Estética Automotiva Detalhada</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 1: CHAVEIRO 24H & DOMICILIAR -->
+  <section id="chaveiro" class="py-16 sm:py-20 bg-fd7-dark border-b border-zinc-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-4">
+        <div>
+          <span class="text-fd7-red font-bold uppercase tracking-widest text-xs">Rápido, confiável e sempre com você</span>
+          <h2 class="font-display font-extrabold text-4xl sm:text-5xl uppercase italic mt-1">Chaveiro <span class="text-fd7-red">24 Horas</span></h2>
+        </div>
+        <p class="text-zinc-400 max-w-md text-sm sm:text-base">
+          Atendimento emergencial automotivo e domiciliar sem danos ao seu patrimônio.
+        </p>
+      </div>
+
+      <!-- Cards com Fundo de Imagem -->
+      <div id="chaveiro-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"></div>
+
+      <!-- Rodapé de Registros Realizados (Chaveiro) -->
+      <div class="mt-8 sm:mt-10 bg-fd7-card/80 border border-zinc-800/90 rounded-2xl p-5 sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
+            <i data-lucide="camera" class="w-4 h-4 text-fd7-red"></i>
+            Registros de Atendimentos — Chaveiro
+          </span>
+          <span class="text-[11px] text-zinc-500">Toque para ampliar</span>
+        </div>
+        <div id="chaveiro-galeria-rodape" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: ESTÉTICA AUTOMOTIVA (DETALHAMENTO + VITRINE COMBINADOS) -->
+  <section id="estetica" class="py-16 sm:py-20 bg-fd7-black border-b border-zinc-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-14 gap-4">
+        <div>
+          <span class="text-fd7-red font-bold uppercase tracking-widest text-xs">Detalhamento, Proteção & Resultados</span>
+          <h2 class="font-display font-extrabold text-4xl sm:text-5xl uppercase italic mt-1">Estética <span class="text-fd7-red">Automotiva</span></h2>
+          <p class="text-zinc-400 mt-2 text-sm sm:text-base max-w-2xl">
+            Conheça nossos serviços de detalhamento com fotos demonstrativas, explicação técnica e galeria real atualizada pela equipe FD7.
+          </p>
+        </div>
+        <a href="https://www.instagram.com/fd7garagem/" target="_blank"
+           class="self-start md:self-auto inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-fd7-red px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-zinc-200 transition">
+          <i data-lucide="instagram" class="w-4 h-4 text-fd7-red"></i>
+          @fd7garagem
+        </a>
+      </div>
+
+      <!-- BLOCOS COMBINADOS -->
+      <div id="estetica-combinada-container" class="space-y-8 sm:space-y-10"></div>
+
+    </div>
+  </section>
+
+  <!-- MODAL / LIGHTBOX PARA AMPLIAR FOTO -->
+  <div id="portfolio-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-fd7-card border border-zinc-800 rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl relative">
+      <button id="close-modal" aria-label="Fechar" class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-black/80 hover:bg-fd7-red text-white flex items-center justify-center transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="aspect-video w-full bg-zinc-950 overflow-hidden">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
+      </div>
+      <div class="p-5 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span id="modal-category" class="text-fd7-red text-xs font-bold uppercase tracking-wider"></span>
+          <h3 id="modal-title" class="font-display font-extrabold text-2xl sm:text-3xl uppercase mt-1"></h3>
+          <p id="modal-desc" class="text-zinc-400 text-xs sm:text-sm mt-2"></p>
+        </div>
+        <a id="modal-wpp" href="#" target="_blank"
+           class="shrink-0 bg-fd7-red hover:bg-fd7-redHover text-white font-bold px-6 py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition">
+          <i data-lucide="message-circle" class="w-4 h-4"></i>
+          Agendar Serviço
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: CONTATOS & REDES -->
+  <section id="contato" class="py-16 sm:py-20 bg-fd7-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-fd7-card border border-zinc-800 rounded-2xl p-6 sm:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-center">
+          <div>
+            <span class="text-fd7-red font-bold uppercase tracking-widest text-xs">Fale Conosco</span>
+            <h2 class="font-display font-extrabold text-4xl sm:text-5xl uppercase italic mt-1 mb-4">Agende ou chame no <span class="text-fd7-red">WhatsApp</span></h2>
+            <p class="text-zinc-400 text-sm sm:text-base mb-6">
+              Atendimento direto com nossa equipe técnica para orçamentos de estética automotiva ou chamados urgentes de chaveiro 24h.
+            </p>
+            <div class="flex items-center gap-4">
+              <a href="https://www.instagram.com/fd7garagem/" target="_blank"
+                 class="inline-flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 px-5 py-3 rounded-xl text-sm font-semibold transition">
+                <i data-lucide="instagram" class="w-5 h-5 text-fd7-red"></i>
+                @fd7garagem
+              </a>
+            </div>
+          </div>
+
+          <div class="space-y-3.5 sm:space-y-4">
+            <a href="https://wa.me/5511940732831?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20FD7!" target="_blank"
+               class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-fd7-red transition group">
+              <div class="flex items-center gap-3.5 sm:gap-4">
+                <div class="w-11 h-11 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-[11px] sm:text-xs text-zinc-400 uppercase font-semibold">Principal / Plantão 24h</div>
+                  <div class="text-base sm:text-lg font-bold text-white">(11) 94073-2831</div>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-zinc-500 group-hover:text-fd7-red transition"></i>
+            </a>
+
+            <a href="https://wa.me/5511989570927?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20FD7!" target="_blank"
+               class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-fd7-red transition group">
+              <div class="flex items-center gap-3.5 sm:gap-4">
+                <div class="w-11 h-11 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-[11px] sm:text-xs text-zinc-400 uppercase font-semibold">Atendimento WhatsApp 2</div>
+                  <div class="text-base sm:text-lg font-bold text-white">(11) 98957-0927</div>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-zinc-500 group-hover:text-fd7-red transition"></i>
+            </a>
+
+            <a href="https://wa.me/5511947912315?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20FD7!" target="_blank"
+               class="flex items-center justify-between p-4 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-fd7-red transition group">
+              <div class="flex items-center gap-3.5 sm:gap-4">
+                <div class="w-11 h-11 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="phone" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <div class="text-[11px] sm:text-xs text-zinc-400 uppercase font-semibold">Atendimento WhatsApp 3</div>
+                  <div class="text-base sm:text-lg font-bold text-white">(11) 94791-2315</div>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-5 h-5 text-zinc-500 group-hover:text-fd7-red transition"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-fd7-black border-t border-zinc-800/80 py-10 text-center sm:text-left">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
+      <div>
+        <span class="font-display font-bold text-lg text-white uppercase">FD7 <span class="text-fd7-red">GARAGEM</span></span>
+        <p class="text-xs mt-1">Chaveiro Automotivo 24h, Domiciliar e Estética Automotiva.</p>
+      </div>
+      <p>© 2026 FD7 Garagem. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+  <a href="https://wa.me/5511940732831?text=Ol%C3%A1%2C%20estou%20no%20site%20da%20FD7%20e%20gostaria%20de%20atendimento!" target="_blank"
+     aria-label="Falar no WhatsApp"
+     class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 sm:p-4 rounded-full shadow-2xl shadow-emerald-900/50 transition transform hover:scale-105 flex items-center justify-center">
+    <i data-lucide="message-circle" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+  </a>
+
+  <!-- DADOS ESTRUTURADOS (PRONTA INTEGRAÇÃO COM SUPABASE) -->
+  <script>
+    const WHATSAPP_PRINCIPAL = "5511940732831";
+
+    const servicosChaveiro = [
+      {
+        titulo: "Abertura de Carros",
+        descricao: "Abertura técnica automotiva nacional e importada sem danificar fechaduras ou borrachas.",
+        icone: "car",
+        imagemFundo: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        titulo: "Codificação e Cópias",
+        descricao: "Chaves codificadas, presenciais (Start/Stop), canivete e cópias reservas com programação.",
+        icone: "cpu",
+        imagemFundo: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        titulo: "Abertura Residencial",
+        descricao: "Atendimento domiciliar 24h para abertura de portas, troca de segredos e fechaduras.",
+        icone: "home",
+        imagemFundo: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        titulo: "Cadeados e Cofres",
+        descricao: "Abertura especializada de cadeados reforçados e cofres residenciais ou comerciais.",
+        icone: "lock",
+        imagemFundo: "https://images.unsplash.com/photo-1582139329536-e7284fece509?auto=format&fit=crop&w=700&q=80"
+      }
+    ];
+
+    const registrosChaveiro = [
+      {
+        url: "https://images.unsplash.com/photo-1616422285623-13ff0162193c?auto=format&fit=crop&w=700&q=80",
+        legenda: "Codificação de chave presencial"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=700&q=80",
+        legenda: "Abertura automotiva sem danos"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=700&q=80",
+        legenda: "Troca de fechadura residencial"
+      }
+    ];
+
+    const servicosEsteticaCombinados = [
+      {
+        id: "est-lavagem",
+        icone: "droplets",
+        tag: "Lavagem & Manutenção",
+        titulo: "Lavagem Técnica Detalhada",
+        descricao: "Limpeza criteriosa de toda a carroceria, rodas, caixas de roda, emblemas e cantos de difícil acesso com pré-lavagem em espuma ativa (Snow Foam) e produtos de pH neutro, finalizada com proteção de manutenção para prolongar o brilho.",
+        imagemDemonstrativa: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1000&q=80",
+        galeriaRodape: [
+          {
+            url: "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=600&q=80",
+            legenda: "Finalização e repelência na pintura"
+          }
+        ]
+      },
+      {
+        id: "est-motor",
+        icone: "settings",
+        tag: "Cofre do Motor",
+        titulo: "Limpeza Técnica de Motor",
+        descricao: "Limpeza artesanal segura realizada com pincéis de detalhamento e produtos biodegradáveis específicos, isolando e protegendo módulos e componentes eletrônicos, com aplicação de verniz de proteção acetinado nas mangueiras e plásticos.",
+        imagemDemonstrativa: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1000&q=80",
+        galeriaRodape: [
+          {
+            url: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80",
+            legenda: "Acabamento técnico sem excesso de brilho"
+          }
+        ]
+      },
+      {
+        id: "est-polimento",
+        icone: "sparkles",
+        tag: "Correção & Proteção de Verniz",
+        titulo: "Polimento Técnico & Vitrificação",
+        descricao: "Processo de correção de pintura que remove micro-riscos, marcas de lavagem mal feita, manchas de chuva ácida e oxidação, devolvendo o espelhamento original do verniz e selando com vitrificação de alta resistência.",
+        imagemDemonstrativa: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1000&q=80",
+        galeriaRodape: [
+          {
+            url: "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=600&q=80",
+            legenda: "Reflexo profundo pós-correção"
+          }
+        ]
+      },
+      {
+        id: "est-interna",
+        icone: "shield-check",
+        tag: "Conforto & Saúde",
+        titulo: "Higienização Interna, Couro & Oxi-Sanitização",
+        descricao: "Extração profunda de sujeira em teto, carpetes, painel e estofados, hidratação de bancos de couro com equilíbrio de pH e oxi-sanitização para eliminar ácaros, fungos, bactérias e odores persistentes (cigarro, umidade e alimentos).",
+        imagemDemonstrativa: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80",
+        galeriaRodape: [
+          {
+            url: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80",
+            legenda: "Couro limpo e hidratado com toque seco"
+          }
+        ]
+      },
+      {
+        id: "est-farois",
+        icone: "sun",
+        tag: "Acabamento & Segurança",
+        titulo: "Revitalização de Faróis & Plásticos",
+        descricao: "Remoção do amarelado e opacidade das lentes dos faróis (melhorando a iluminação noturna e a estética frontal) e restauração da cor original de para-choques, frisos e plásticos internos ressecados pelo sol.",
+        imagemDemonstrativa: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=80",
+        galeriaRodape: []
+      }
+    ];
+
+    function buildWhatsAppLink(mensagem) {
+      return `https://wa.me/${WHATSAPP_PRINCIPAL}?text=${encodeURIComponent(mensagem)}`;
+    }
+
+    // 1. Render Cards de Chaveiro com Fundo de Imagem
+    const chaveiroGrid = document.getElementById("chaveiro-grid");
+    servicosChaveiro.forEach(item => {
+      chaveiroGrid.innerHTML += `
+        <div class="relative rounded-2xl overflow-hidden border border-zinc-800 hover:border-fd7-red/80 transition group min-h-[260px] sm:min-h-[300px] flex flex-col justify-between p-6 shadow-lg">
+          <img src="${item.imagemFundo}" alt="${item.titulo}" 
+               class="absolute inset-0 w-full h-full object-cover opacity-55 group-hover:opacity-70 group-hover:scale-110 transition duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-fd7-black via-fd7-black/80 to-fd7-black/45"></div>
+
+          <div class="relative z-10">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-fd7-red text-white flex items-center justify-center mb-4 sm:mb-5 shadow-lg shadow-red-600/30">
+              <i data-lucide="${item.icone}" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+            </div>
+            <h3 class="font-display font-extrabold text-2xl uppercase text-white mb-2 drop-shadow">${item.titulo}</h3>
+            <p class="text-zinc-200 text-sm leading-relaxed mb-6">${item.descricao}</p>
+          </div>
+
+          <a href="${buildWhatsAppLink(`Olá, preciso do serviço de Chaveiro: ${item.titulo}`)}" target="_blank"
+             class="relative z-10 w-full py-3 px-4 rounded-xl bg-zinc-950/90 hover:bg-fd7-red border border-zinc-700 hover:border-fd7-red text-white text-sm font-bold text-center transition">
+            Chamar Agora
+          </a>
+        </div>
+      `;
+    });
+
+    // Render Galeria de Rodapé do Chaveiro
+    const chaveiroGaleriaRodape = document.getElementById("chaveiro-galeria-rodape");
+    chaveiroGaleriaRodape.innerHTML = registrosChaveiro.map(foto => `
+      <div onclick="openImageModal('${foto.url}', 'Chaveiro 24h FD7', '${foto.legenda}', 'Atendimento especializado de chaveiro automotivo e residencial.')"
+           class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-zinc-800 hover:border-fd7-red cursor-pointer bg-zinc-900">
+        <img src="${foto.url}" alt="${foto.legenda}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-2">
+          <p class="text-[10px] text-zinc-200 truncate">${foto.legenda}</p>
+        </div>
+      </div>
+    `).join("") + `
+      <div class="aspect-[4/3] rounded-xl border border-dashed border-zinc-800 bg-zinc-900/30 flex flex-col items-center justify-center p-3 text-center">
+        <i data-lucide="plus-circle" class="w-5 h-5 text-zinc-600 mb-1"></i>
+        <span class="text-[10px] text-zinc-500 leading-tight">Novos registros via painel FD7</span>
+      </div>
+    `;
+
+    // 2. Render Estética Automotiva COMBINADA
+    const esteticaContainer = document.getElementById("estetica-combinada-container");
+    esteticaContainer.innerHTML = servicosEsteticaCombinados.map((servico, index) => {
+      const isEven = index % 2 === 1;
+      const imageOrderClass = isEven ? "lg:order-2" : "lg:order-1";
+      const contentOrderClass = isEven ? "lg:order-1" : "lg:order-2";
+
+      return `
+        <article class="bg-fd7-card border border-zinc-800 hover:border-zinc-700 rounded-2xl overflow-hidden shadow-xl transition">
+          <div class="grid grid-cols-1 lg:grid-cols-12">
+            <div class="lg:col-span-5 ${imageOrderClass} relative aspect-video lg:aspect-auto min-h-[220px] sm:min-h-[270px] overflow-hidden cursor-pointer group"
+                 onclick="openImageModal('${servico.imagemDemonstrativa}', '${servico.tag}', '${servico.titulo}', '${servico.descricao}')">
+              <img src="${servico.imagemDemonstrativa}" alt="${servico.titulo}" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
+              <span class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-sm text-white text-[11px] px-2.5 py-1 rounded-md border border-white/10 flex items-center gap-1.5">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5 text-fd7-red"></i>
+                Ampliar
+              </span>
+            </div>
+
+            <div class="lg:col-span-7 ${contentOrderClass} p-5 sm:p-8 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center gap-3 mb-2.5 sm:mb-3">
+                  <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-fd7-red/15 border border-fd7-red/30 text-fd7-red flex items-center justify-center shrink-0">
+                    <i data-lucide="${servico.icone}" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-fd7-red font-bold uppercase tracking-widest text-[11px] sm:text-xs">${servico.tag}</span>
+                </div>
+                
+                <h3 class="font-display font-extrabold text-2xl sm:text-4xl uppercase italic text-white mb-3 sm:mb-4">
+                  ${servico.titulo}
+                </h3>
+                
+                <p class="text-zinc-300 text-sm sm:text-base leading-relaxed">
+                  ${servico.descricao}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 sm:pt-5 border-t border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                <span class="text-xs text-zinc-400 flex items-center gap-1.5">
+                  <i data-lucide="shield" class="w-4 h-4 text-fd7-red shrink-0"></i>
+                  Produtos de alta performance
+                </span>
+                <a href="${buildWhatsAppLink(`Olá, gostaria de agendar o serviço de ${servico.titulo} na FD7!`)}" target="_blank"
+                   class="w-full sm:w-auto justify-center bg-fd7-red hover:bg-fd7-redHover text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl transition inline-flex items-center gap-2 shadow-lg shadow-red-600/20">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i>
+                  Agendar Serviço
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-zinc-950/75 border-t border-zinc-800/90 px-5 sm:px-8 py-4">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
+                <i data-lucide="images" class="w-3.5 h-3.5 text-fd7-red"></i>
+                Resultados deste serviço
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5 sm:gap-3">
+              ${servico.galeriaRodape.map(foto => `
+                <div onclick="openImageModal('${foto.url}', '${servico.tag}', '${servico.titulo}', '${foto.legenda}')"
+                     class="group relative aspect-[4/3] rounded-xl overflow-hidden border border-zinc-800 hover:border-fd7-red cursor-pointer bg-zinc-900">
+                  <img src="${foto.url}" alt="${foto.legenda}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                  <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-2">
+                    <p class="text-[10px] text-zinc-200 truncate">${foto.legenda}</p>
+                  </div>
+                </div>
+              `).join("")}
+
+              <div class="aspect-[4/3] rounded-xl border border-dashed border-zinc-800 bg-zinc-900/30 flex flex-col items-center justify-center p-2 text-center">
+                <i data-lucide="plus-circle" class="w-4 h-4 text-zinc-600 mb-1"></i>
+                <span class="text-[10px] text-zinc-500 leading-tight">Adicionar fotos pelo painel</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    // Controle do Modal Lightbox
+    const modal = document.getElementById("portfolio-modal");
+    function openImageModal(imgUrl, category, title, desc) {
+      document.getElementById("modal-img").src = imgUrl;
+      document.getElementById("modal-category").textContent = category;
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-desc").textContent = desc;
+      document.getElementById("modal-wpp").href = buildWhatsAppLink(`Olá, vi no site da FD7 o serviço "${title}" e gostaria de agendar!`);
+      modal.classList.remove("hidden");
+    }
+
+    document.getElementById("close-modal").addEventListener("click", () => modal.classList.add("hidden"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.add("hidden");
+    });
+
+    // Inicializar e fechar menu mobile ao clicar em link
+    lucide.createIcons();
+    const mobileMenu = document.getElementById("mobile-menu");
+    document.getElementById("mobile-menu-btn").addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    document.querySelectorAll(".mobile-link").forEach(link => {
+      link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    });
+  </script>
+</body>
+</html>
