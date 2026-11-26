@@ -1348,7 +1348,7 @@
       </div>
 
       <!-- 3 PACOTES OFICIAIS DE ESTÉTICA AUTOMOTIVA -->
-      <div class="grid-3">
+      <div class="grid-3" id="packages-grid">
         <!-- PACOTE 1 -->
         <div class="card package-card">
           <div>
@@ -1496,7 +1496,7 @@
           <p>Escolha micro-serviços avulsos na higienização interna ou agende o pacote completo de limpeza e verniz de motor.</p>
         </div>
 
-        <div class="grid-2">
+        <div class="grid-2" id="special-services-grid">
           <!-- CARD ADICIONAL 01: HIGIENIZAÇÃO INTERNA -->
           <div class="card package-card variable-card">
             <div>
@@ -1591,7 +1591,7 @@
           </div>
         </div>
         <div class="price-table-scroll">
-          <table class="price-table">
+          <table class="price-table" id="price-table">
             <thead>
               <tr>
                 <th>Tipo de Veículo</th>
@@ -1659,7 +1659,7 @@
       </div>
 
       <div class="showcase-toolbar">
-        <div class="filter-tabs" role="tablist" aria-label="Filtrar vitrine por categoria">
+        <div class="filter-tabs" id="filter-tabs" role="tablist" aria-label="Filtrar vitrine por categoria">
           <button type="button" class="filter-btn active" data-filter="todos">Todos os Serviços (6)</button>
           <button type="button" class="filter-btn" data-filter="estetica">Estética Automotiva (4)</button>
           <button type="button" class="filter-btn" data-filter="chaveiro">Chaveiro 24h (2)</button>
@@ -1835,7 +1835,7 @@
       <div class="location-grid">
         <!-- CANAIS DE ATENDIMENTO -->
         <div>
-          <div class="card" style="margin-bottom: 18px;">
+          <div class="card" id="whatsapp-channels-card" style="margin-bottom: 18px;">
             <h3 style="margin-bottom: 14px;">Fale Direto no WhatsApp</h3>
 
             <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20atendimento%20Chaveiro%2024h." target="_blank" rel="noopener noreferrer" class="contact-channel">
@@ -1938,7 +1938,7 @@
 
       <div class="footer-bottom">
         <span>&copy; 2026 Garagem FD7. Todos os direitos reservados.</span>
-        <span>Atendimento em São Mateus e região • Zona Leste – SP</span>
+        <span>Atendimento em São Mateus e região • Zona Leste – SP • <a href="admin.html" style="color: var(--text-muted); text-decoration: underline;">Painel Admin</a></span>
       </div>
     </div>
   </footer>
@@ -1948,27 +1948,294 @@
     WhatsApp FD7
   </a>
 
-  <!-- SCRIPT SIMPLES PARA FILTRO DA VITRINE -->
+  <!-- INTEGRAÇÃO SUPABASE + FILTRO DINÂMICO DA VITRINE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const showcaseCards = document.querySelectorAll('.showcase-card');
+    const SUPABASE_URL = "https://hdhctpmwxmfpocenfivb.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_XS6esOyU53ATfFVzE7zegA_IjrTbSc7";
+    const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
+    let currentFilter = 'todos';
 
-        const filter = btn.getAttribute('data-filter');
-        showcaseCards.forEach((card) => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'todos' || category === filter) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
+    function bindShowcaseFilters() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const showcaseCards = document.querySelectorAll('.showcase-card');
+
+      filterButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.getAttribute('data-filter');
+
+          showcaseCards.forEach((card) => {
+            const category = card.getAttribute('data-category');
+            if (currentFilter === 'todos' || category === currentFilter) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
         });
       });
-    });
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatBRL(val) {
+      const num = Number(val);
+      if (isNaN(num)) return String(val);
+      return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function splitBRLParts(val) {
+      const formatted = formatBRL(val);
+      const parts = formatted.split(',');
+      return { integer: parts[0], cents: ',' + (parts[1] || '00') };
+    }
+
+    function renderPackagesFromSupabase(pacotes, wppEstetica1, wppEstetica2) {
+      if (!Array.isArray(pacotes) || pacotes.length === 0) return;
+      const grid = document.getElementById('packages-grid');
+      const table = document.getElementById('price-table');
+
+      grid.innerHTML = pacotes.map((p, idx) => {
+        const isFeatured = Boolean(p.destaque);
+        const parts = splitBRLParts(p.preco_carro);
+        const phone = idx === 1 ? (wppEstetica1 || '5511989570927') : (wppEstetica2 || '5511947912315');
+        const msg = encodeURIComponent(`Olá! Gostaria de agendar o ${p.tier_label || 'Pacote ' + (idx + 1)} - ${p.titulo} na Garagem FD7.`);
+        const itens = Array.isArray(p.itens) ? p.itens : [];
+
+        return `
+          <div class="card package-card ${isFeatured ? 'featured' : ''}">
+            <div>
+              <div class="package-header-top">
+                <span class="package-tier">${escapeHtml(p.tier_label || 'Pacote 0' + (idx + 1))}</span>
+                ${isFeatured ? '<span class="package-badge">Mais Procurado</span>' : ''}
+              </div>
+              <h3 class="package-title">${escapeHtml(p.titulo)}</h3>
+              <p class="package-subtitle">${escapeHtml(p.subtitulo || '')}</p>
+
+              <div class="package-price-box">
+                <span class="price-from-label">Valor a partir de</span>
+                <div class="price-main">
+                  <span class="currency">R$</span>
+                  <span class="amount">${parts.integer}</span>
+                  <span class="cents">${parts.cents}</span>
+                </div>
+                <div class="vehicle-prices">
+                  <div class="vehicle-price-row">
+                    <span>Carro (Hatch / Sedan)</span>
+                    <strong>R$ ${formatBRL(p.preco_carro)}</strong>
+                  </div>
+                  <div class="vehicle-price-row">
+                    <span>Pick-up</span>
+                    <strong>R$ ${formatBRL(p.preco_pickup)}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <ul class="package-list">
+                ${itens.map(item => `<li><span class="package-check">✓</span><span>${escapeHtml(item)}</span></li>`).join('')}
+              </ul>
+            </div>
+
+            <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="btn ${isFeatured ? 'btn-red' : 'btn-glass'}">
+              Agendar Pacote ${idx + 1}
+            </a>
+          </div>
+        `;
+      }).join('');
+
+      if (table && pacotes.length >= 3) {
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>Tipo de Veículo</th>
+              ${pacotes.map((p, i) => `<th>Pacote ${i + 1} • ${escapeHtml(p.titulo)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Carro (Hatch / Sedan)</strong></td>
+              ${pacotes.map(p => `<td><span class="price-tag"><span>R$</span>${formatBRL(p.preco_carro)}</span></td>`).join('')}
+            </tr>
+            <tr>
+              <td><strong>Pick-up</strong></td>
+              ${pacotes.map(p => `<td><span class="price-tag"><span>R$</span>${formatBRL(p.preco_pickup)}</span></td>`).join('')}
+            </tr>
+          </tbody>
+        `;
+      }
+    }
+
+    function renderSpecialServicesFromSupabase(especiais, wppEstetica2) {
+      if (!Array.isArray(especiais) || especiais.length === 0) return;
+      const grid = document.getElementById('special-services-grid');
+      const phone = wppEstetica2 || '5511947912315';
+
+      grid.innerHTML = especiais.map((s, idx) => {
+        const isMicro = s.tipo === 'micro_servicos';
+        const itens = Array.isArray(s.itens) ? s.itens : [];
+        const msg = encodeURIComponent(`Olá! Gostaria de um orçamento para ${s.titulo} na Garagem FD7.`);
+
+        let priceHeaderHtml = '';
+        if (isMicro) {
+          priceHeaderHtml = `
+            <span class="price-from-label">Faixa de investimento</span>
+            <div class="variable-price-range">
+              <span>R$</span>${formatBRL(s.preco_min)} – <span>R$</span>${formatBRL(s.preco_max)}
+            </div>
+            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">${escapeHtml(s.nota_preco || 'Valores por micro-serviço ou combo completo:')}</span>
+          `;
+        } else {
+          const parts = splitBRLParts(s.preco_min);
+          priceHeaderHtml = `
+            <span class="price-from-label">Valor cheio a partir de</span>
+            <div class="price-main">
+              <span class="currency" style="color: var(--amber);">R$</span>
+              <span class="amount">${parts.integer}</span>
+              <span class="cents">${parts.cents}</span>
+            </div>
+            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">${escapeHtml(s.nota_preco || 'Pacote completo incluso (conforme o estado do veículo):')}</span>
+          `;
+        }
+
+        let listHtml = '';
+        if (isMicro) {
+          listHtml = `
+            <ul class="micro-service-list">
+              ${itens.map(it => `
+                <li class="micro-service-item">
+                  <span class="micro-service-name"><span class="package-check">✓</span><span>${escapeHtml(it.nome || it)}</span></span>
+                  <span class="micro-service-price">${it.preco ? 'R$ ' + formatBRL(it.preco) : 'Sob consulta'}</span>
+                </li>
+              `).join('')}
+            </ul>
+          `;
+        } else {
+          listHtml = `
+            <ul class="package-list">
+              ${itens.map(it => `<li><span class="package-check">✓</span><span>${escapeHtml(it.nome || it)}</span></li>`).join('')}
+            </ul>
+          `;
+        }
+
+        return `
+          <div class="card package-card variable-card">
+            <div>
+              <div class="package-header-top">
+                <span class="package-tier" style="color: var(--amber);">${escapeHtml(s.tier_label || 'Serviço Especial 0' + (idx + 1))}</span>
+                <span class="variable-badge">${escapeHtml(s.badge_label || (isMicro ? 'Preço Variável' : 'Serviço Completo'))}</span>
+              </div>
+              <h3 class="package-title">${escapeHtml(s.titulo)}</h3>
+              <p class="package-subtitle">${escapeHtml(s.subtitulo || '')}</p>
+
+              <div class="package-price-box" style="border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.06);">
+                ${priceHeaderHtml}
+              </div>
+
+              ${listHtml}
+            </div>
+
+            <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+              ${escapeHtml(s.cta_label || 'Consultar ' + s.titulo)}
+            </a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderVitrineFromSupabase(items, cfg) {
+      if (!Array.isArray(items) || items.length === 0) return;
+      const grid = document.getElementById('showcase-grid');
+      const tabs = document.getElementById('filter-tabs');
+
+      const totalCount = items.length;
+      const esteticaCount = items.filter(i => i.categoria === 'estetica').length;
+      const chaveiroCount = items.filter(i => i.categoria === 'chaveiro').length;
+
+      if (tabs) {
+        tabs.innerHTML = `
+          <button type="button" class="filter-btn ${currentFilter === 'todos' ? 'active' : ''}" data-filter="todos">Todos os Serviços (${totalCount})</button>
+          <button type="button" class="filter-btn ${currentFilter === 'estetica' ? 'active' : ''}" data-filter="estetica">Estética Automotiva (${esteticaCount})</button>
+          <button type="button" class="filter-btn ${currentFilter === 'chaveiro' ? 'active' : ''}" data-filter="chaveiro">Chaveiro 24h (${chaveiroCount})</button>
+        `;
+      }
+
+      grid.innerHTML = items.map(item => {
+        const isChaveiro = item.categoria === 'chaveiro';
+        const catLabel = isChaveiro ? 'Chaveiro 24h' : 'Estética Automotiva';
+        const isReal = item.tipo_registro !== 'demo';
+        const phone = isChaveiro ? (cfg?.wpp_chaveiro || '5511940732831') : (cfg?.wpp_estetica_1 || '5511989570927');
+        const msg = encodeURIComponent(item.mensagem_whatsapp || `Olá! Vi na vitrine o serviço "${item.titulo}" e gostaria de um orçamento.`);
+        const hiddenClass = (currentFilter !== 'todos' && currentFilter !== item.categoria) ? 'hidden' : '';
+
+        return `
+          <article class="showcase-card ${hiddenClass}" data-category="${escapeHtml(item.categoria)}">
+            <div class="showcase-media">
+              <img src="${escapeHtml(item.imagem_url)}" alt="${escapeHtml(item.titulo)}" loading="lazy" />
+              <span class="showcase-category-tag">${catLabel}</span>
+              <span class="${isReal ? 'showcase-real-tag' : 'showcase-demo-tag'}">${isReal ? 'Serviço FD7' : 'Foto Demo'}</span>
+            </div>
+            <div class="showcase-body">
+              <div>
+                <span class="showcase-service-label">Serviço Representado</span>
+                <h3>${escapeHtml(item.titulo)}</h3>
+                <p>${escapeHtml(item.descricao || '')}</p>
+              </div>
+              <div class="showcase-footer">
+                <span style="color: var(--text-muted);">${escapeHtml(item.local_atendimento || (isChaveiro ? 'Atendimento móvel 24h' : 'Na loja física'))}</span>
+                <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="showcase-link">
+                  ${isChaveiro ? 'Acionar Chaveiro' : 'Solicitar este serviço'} &rarr;
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      bindShowcaseFilters();
+    }
+
+    async function loadFD7FromSupabase() {
+      bindShowcaseFilters();
+      if (!sb) return;
+
+      try {
+        const [cfgRes, pacRes, espRes, vitRes] = await Promise.all([
+          sb.from('fd7_config').select('*').limit(1).maybeSingle(),
+          sb.from('fd7_pacotes').select('*').order('ordem', { ascending: true }),
+          sb.from('fd7_servicos_especiais').select('*').order('ordem', { ascending: true }),
+          sb.from('fd7_vitrine').select('*').order('ordem', { ascending: true }).order('created_at', { ascending: false })
+        ]);
+
+        const cfg = cfgRes?.data || null;
+
+        if (pacRes?.data && pacRes.data.length > 0) {
+          renderPackagesFromSupabase(pacRes.data, cfg?.wpp_estetica_1, cfg?.wpp_estetica_2);
+        }
+
+        if (espRes?.data && espRes.data.length > 0) {
+          renderSpecialServicesFromSupabase(espRes.data, cfg?.wpp_estetica_2);
+        }
+
+        if (vitRes?.data && vitRes.data.length > 0) {
+          renderVitrineFromSupabase(vitRes.data, cfg);
+        }
+      } catch (err) {
+        console.warn('FD7 Supabase fallback ativo:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadFD7FromSupabase);
   </script>
 
 </body>
