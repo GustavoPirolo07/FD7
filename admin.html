@@ -757,9 +757,12 @@
         titulo: document.getElementById(`esp-titulo-${id}`).value.trim(),
         subtitulo: document.getElementById(`esp-sub-${id}`).value.trim(),
         preco_min: Number(document.getElementById(`esp-min-${id}`).value),
-        preco_max: maxVal > 0 ? maxVal : null,
         itens: newItens
       };
+
+      if (Object.prototype.hasOwnProperty.call(srv, 'preco_max')) {
+        payload.preco_max = maxVal > 0 ? maxVal : null;
+      }
 
       const { error } = await sb.from('fd7_servicos_especiais').update(payload).eq('id', id);
       if (error) showToast('Erro ao salvar serviço: ' + error.message, true);
