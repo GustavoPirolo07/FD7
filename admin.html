@@ -832,9 +832,15 @@
       });
     }
 
-        async function loadEspeciaisAdmin() {
+        let especiaisOcultos = 0;
+    async function loadEspeciaisAdmin(useCache = false) {
       const container = document.getElementById('admin-especiais-list');
-      let { data, error } = await sb.from('fd7_servicos_especiais').select('*').order('ordem', { ascending: true });
+      let data, error = null;
+      if (useCache) {
+        data = especiaisCache; // redesenha sem ir ao banco (preserva alterações não salvas)
+      } else {
+        ({ data, error } = await sb.from('fd7_servicos_especiais').select('*').order('ordem', { ascending: true }));
+      }
 
       if (error) {
         container.innerHTML = `<p style="color:#fca5a5;">Erro: ${escapeHtml(error.message)}</p>`;
@@ -844,10 +850,13 @@
         container.innerHTML = `<p style="color:var(--text-muted);">Nenhum serviço especial encontrado em <code>fd7_servicos_especiais</code>.</p>`;
         return;
       }
-      const totalBruto = data.length;
-      data = dedupeEspeciais(data);
-      especiaisCache = data;
-      const ocultos = totalBruto - data.length;
+      if (!useCache) {
+        const totalBruto = data.length;
+        data = dedupeEspeciais(data);
+        especiaisCache = data;
+        especiaisOcultos = totalBruto - data.length;
+      }
+      const ocultos = especiaisOcultos;
 
       const avisoDup = ocultos > 0 ? `<p style="color:#fcd34d;font-size:0.85rem;">⚠ ${ocultos} registro(s) duplicado(s) em <code>fd7_servicos_especiais</code> foram ocultados. Remova-os no Supabase para limpar a tabela.</p>` : '';
       container.innerHTML = avisoDup + data.map(s => {
@@ -912,7 +921,7 @@
                 <span>Serviço Especial Ativo no Site</span>
               </label>
               <label class="checkbox-label">
-                <input type="checkbox" id="esp-auto-${sid}" checked onchange="recalcEspecial('${sid}')" />
+                <input type="checkbox" id="esp-auto-${sid}" ${s._auto === false ? '' : 'checked'} onchange="recalcEspecial('${sid}')" />
                 <span>Calcular valor inicial e máximo automaticamente pelas etapas</span>
               </label>
             </div>
@@ -957,19 +966,42 @@
       }
     };
 
-    window.addEspecialItem = (id) => {
+    // Copia o que está digitado na tela para o cache, para não perder edições ao redesenhar
+    function syncEspecialFromDOM(id) {
       const srv = especiaisCache.find(x => String(x.id) === String(id));
+      if (!srv) return null;
+      const val = (suffix) => { const el = document.getElementById(`esp-${suffix}-${id}`); return el ? el.value : undefined; };
+      const set = (campo, suffix) => { const v = val(suffix); if (v !== undefined) srv[campo] = v; };
+      set('titulo', 'titulo'); set('badge', 'badge'); set('preco_destaque', 'destaque');
+      set('valor_inicial', 'val-ini'); set('preco_max', 'max'); set('whatsapp', 'wpp');
+      set('ordem', 'ordem'); set('subtitulo', 'sub');
+      const ativoEl = document.getElementById(`esp-ativo-${id}`);
+      if (ativoEl) srv.ativo = ativoEl.checked;
+      const autoEl = document.getElementById(`esp-auto-${id}`);
+      if (autoEl) srv._auto = autoEl.checked;
+      srv.itens = (Array.isArray(srv.itens) ? srv.itens : []).map((it, idx) => {
+        const nomeEl = document.getElementById(`esp-item-nome-${id}-${idx}`);
+        const precoEl = document.getElementById(`esp-item-preco-${id}-${idx}`);
+        if (!nomeEl) return it;
+        const raw = precoEl ? precoEl.value.trim() : '';
+        return { nome: nomeEl.value, preco: raw !== '' && !isNaN(Number(raw)) ? Number(raw) : null };
+      });
+      return srv;
+    }
+
+    window.addEspecialItem = (id) => {
+      const srv = syncEspecialFromDOM(id);
       if (!srv) return;
       srv.itens = Array.isArray(srv.itens) ? srv.itens : [];
       srv.itens.push({ nome: '', preco: null });
-      loadEspeciaisAdmin();
+      loadEspeciaisAdmin(true);
     };
 
     window.removeEspecialItem = (id, idx) => {
-      const srv = especiaisCache.find(x => String(x.id) === String(id));
+      const srv = syncEspecialFromDOM(id);
       if (!srv || !Array.isArray(srv.itens)) return;
       srv.itens.splice(idx, 1);
-      loadEspeciaisAdmin();
+      loadEspeciaisAdmin(true).then(() => window.recalcEspecial(id));
     };
 
     window.saveEspecial = async (id) => {
