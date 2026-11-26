@@ -730,8 +730,7 @@
         const nomeAtual = p.nome || p.titulo || '';
         const itensTexto = (Array.isArray(p.itens) ? p.itens : [])
           .map(it => typeof it === 'object' && it !== null ? (it.nome || '') : String(it || ''))
-          .join('
-');
+          .join('\n');
 
         return `
           <div class="card" style="background:#18181c;">
@@ -792,8 +791,7 @@
 
     window.savePacote = async (id) => {
       const itensRaw = document.getElementById(`pac-itens-${id}`).value;
-      const itens = itensRaw.split('
-').map(s => s.trim()).filter(Boolean);
+      const itens = itensRaw.split('\n').map(s => s.trim()).filter(Boolean);
       const nomeVal = document.getElementById(`pac-nome-${id}`).value.trim();
 
       const payload = {
