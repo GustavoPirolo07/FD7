@@ -833,6 +833,32 @@
       color: #fff;
     }
 
+    .service-extra-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .service-extra-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--red);
+      background: rgba(225, 29, 29, 0.12);
+      border: 1px solid rgba(225, 29, 29, 0.28);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .service-extra-price {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+
     /* SEÇÃO REPERTÓRIO & VITRINE */
     .showcase-toolbar {
       display: flex;
@@ -1218,21 +1244,21 @@
         <a href="#vitrine">Vitrine</a>
         <a href="#localizacao">Localização</a>
       </div>
-      <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20atendimento%20Chaveiro%2024h%20FD7." target="_blank" rel="noopener noreferrer" class="nav-cta">
+      <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20atendimento%20Chaveiro%2024h%20FD7." data-wpp="chaveiro" data-msg="Olá! Preciso de atendimento Chaveiro 24h FD7." target="_blank" rel="noopener noreferrer" class="nav-cta">
         Chaveiro 24h
       </a>
     </div>
   </nav>
 
   <!-- CABEÇALHO LIMPO: SOMENTE SLOGAN E AÇÕES PARA VALORIZAR A FOTO NO CELULAR -->
-  <header class="hero">
+  <header class="hero" id="hero-section">
     <div class="hero-overlay"></div>
     <div class="container">
       <div class="hero-content">
         <span class="hero-tag">São Mateus e Região • Chaveiro 24h &amp; Estética</span>
-        <h1 class="hero-slogan">Rápido, confiável e <span>sempre com você.</span></h1>
+        <h1 class="hero-slogan" id="hero-slogan">Rápido, confiável e <span>sempre com você.</span></h1>
         <div class="hero-buttons">
-          <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20socorro%20Chaveiro%2024h." target="_blank" rel="noopener noreferrer" class="btn btn-red">
+          <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20socorro%20Chaveiro%2024h." data-wpp="chaveiro" data-msg="Olá! Preciso de socorro Chaveiro 24h." target="_blank" rel="noopener noreferrer" class="btn btn-red">
             Chaveiro 24h
           </a>
           <a href="#estetica" class="btn btn-glass">
@@ -1243,7 +1269,7 @@
     </div>
   </header>
 
-  <!-- BLOCO QUEM SOMOS (TEXTO DESCRITIVO MOVIDO DO CABEÇALHO) -->
+  <!-- BLOCO QUEM SOMOS -->
   <div id="quem-somos" class="about-strip">
     <div class="container">
       <div class="about-box">
@@ -1261,7 +1287,7 @@
           </div>
           <div class="highlight-pill">
             <strong>Estética na Loja</strong>
-            <span>Atendimento presencial em horário comercial na Trav. Bandeira Branca, 126.</span>
+            <span id="about-endereco-text">Atendimento presencial em horário comercial na Trav. Bandeira Branca, 126.</span>
           </div>
         </div>
       </div>
@@ -1279,7 +1305,7 @@
         </p>
       </div>
 
-      <div class="grid-3">
+      <div class="grid-3" id="chaveiro-services-grid">
         <div class="card">
           <div class="card-icon">01</div>
           <h3>Aberturas Emergenciais</h3>
@@ -1300,28 +1326,30 @@
       </div>
 
       <!-- SERVIÇOS ADICIONAIS ESPECIALIZADOS VOLKSWAGEN -->
-      <div class="vw-card">
-        <div class="vw-card-main">
-          <div class="vw-logo-box" aria-hidden="true">
-            <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="45" stroke="#60a5fa" stroke-width="6"/>
-              <circle cx="50" cy="50" r="37" stroke="#93c5fd" stroke-width="2.5"/>
-              <path d="M31 24L50 62L69 24" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M22 43L41 80L50 62L59 80L78 43" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+      <div id="chaveiro-vw-container">
+        <div class="vw-card">
+          <div class="vw-card-main">
+            <div class="vw-logo-box" aria-hidden="true">
+              <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" stroke="#60a5fa" stroke-width="6"/>
+                <circle cx="50" cy="50" r="37" stroke="#93c5fd" stroke-width="2.5"/>
+                <path d="M31 24L50 62L69 24" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 43L41 80L50 62L59 80L78 43" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <span class="vw-tag">Especialidade Automotiva • Linha VW</span>
+              <h3>Serviços Adicionais Volkswagen</h3>
+              <p>
+                Realizamos serviços especializados de <strong>cópia e programação de chaves da marca Volkswagen</strong> com equipamentos dedicados, precisão eletrônica e garantia de procedência.
+              </p>
+              <span class="vw-cert-pill">✓ Serviço especializado com certificado</span>
+            </div>
           </div>
-          <div>
-            <span class="vw-tag">Especialidade Automotiva • Linha VW</span>
-            <h3>Serviços Adicionais Volkswagen</h3>
-            <p>
-              Realizamos serviços especializados de <strong>cópia e programação de chaves da marca Volkswagen</strong> com equipamentos dedicados, precisão eletrônica e garantia de procedência.
-            </p>
-            <span class="vw-cert-pill">✓ Serviço especializado com certificado</span>
-          </div>
+          <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20para%20c%C3%B3pia%20ou%20programa%C3%A7%C3%A3o%20de%20chave%20Volkswagen." data-wpp="chaveiro" data-msg="Olá! Gostaria de um orçamento para cópia ou programação de chave Volkswagen." target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="white-space: nowrap;">
+            Consultar Linha VW
+          </a>
         </div>
-        <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20para%20c%C3%B3pia%20ou%20programa%C3%A7%C3%A3o%20de%20chave%20Volkswagen." target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="white-space: nowrap;">
-          Consultar Linha VW
-        </a>
       </div>
 
       <div class="emergency-banner">
@@ -1329,8 +1357,8 @@
           <h4>Ficou trancado para fora ou perdeu a chave agora?</h4>
           <p>Nossa equipe de chaveiro vai até você 24 horas por dia em São Mateus e região.</p>
         </div>
-        <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Estou%20com%20uma%20emerg%C3%AAncia%20de%20Chaveiro%2024h." target="_blank" rel="noopener noreferrer" class="btn btn-red">
-          Chamar Plantão: (11) 94073-2831
+        <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Estou%20com%20uma%20emerg%C3%AAncia%20de%20Chaveiro%2024h." data-wpp="chaveiro" data-msg="Olá! Estou com uma emergência de Chaveiro 24h." target="_blank" rel="noopener noreferrer" class="btn btn-red">
+          Chamar Plantão: <span data-wpp-display="chaveiro">(11) 94073-2831</span>
         </a>
       </div>
     </div>
@@ -1388,7 +1416,7 @@
             </ul>
           </div>
 
-          <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%201%20-%20Lavagem%20B%C3%A1sica%20na%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+          <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%201%20-%20Lavagem%20B%C3%A1sica%20na%20Garagem%20FD7." data-wpp="estetica2" data-msg="Olá! Gostaria de agendar o Pacote 1 - Lavagem Básica na Garagem FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
             Agendar Pacote 1
           </a>
         </div>
@@ -1435,7 +1463,7 @@
             </ul>
           </div>
 
-          <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%202%20-%20Lavagem%20T%C3%A9cnica%20na%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="btn btn-red">
+          <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%202%20-%20Lavagem%20T%C3%A9cnica%20na%20Garagem%20FD7." data-wpp="estetica1" data-msg="Olá! Gostaria de agendar o Pacote 2 - Lavagem Técnica na Garagem FD7." target="_blank" rel="noopener noreferrer" class="btn btn-red">
             Agendar Pacote 2
           </a>
         </div>
@@ -1483,7 +1511,7 @@
             </ul>
           </div>
 
-          <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%203%20-%20Lavagem%20Premium%20na%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+          <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20Pacote%203%20-%20Lavagem%20Premium%20na%20Garagem%20FD7." data-wpp="estetica2" data-msg="Olá! Gostaria de agendar o Pacote 3 - Lavagem Premium na Garagem FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
             Agendar Pacote 3
           </a>
         </div>
@@ -1539,7 +1567,7 @@
               </ul>
             </div>
 
-            <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20para%20Higieniza%C3%A7%C3%A3o%20Interna%20na%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+            <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20um%20or%C3%A7amento%20para%20Higieniza%C3%A7%C3%A3o%20Interna%20na%20Garagem%20FD7." data-wpp="estetica1" data-msg="Olá! Gostaria de um orçamento para Higienização Interna na Garagem FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
               Consultar Higienização Interna
             </a>
           </div>
@@ -1573,7 +1601,7 @@
               </ul>
             </div>
 
-            <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20a%20Limpeza%20de%20Motor%20(a%20partir%20de%20R%24%2070%2C00)%20na%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+            <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20a%20Limpeza%20de%20Motor%20(a%20partir%20de%20R%24%2070%2C00)%20na%20Garagem%20FD7." data-wpp="estetica1" data-msg="Olá! Gostaria de agendar a Limpeza de Motor (a partir de R$ 70,00) na Garagem FD7." target="_blank" rel="noopener noreferrer" class="btn btn-glass">
               Agendar Limpeza de Motor
             </a>
           </div>
@@ -1625,7 +1653,7 @@
       <!-- SERVIÇOS CONFIRMADOS (AVULSOS OU ADICIONAIS) -->
       <div class="services-subgrid">
         <h3 class="services-subtitle">Serviços Disponíveis (Avulsos ou Adicionais aos Pacotes)</h3>
-        <div class="grid-2">
+        <div class="grid-2" id="estetica-extra-services-grid">
           <div class="card">
             <h3>Lavagem Técnica Detalhada</h3>
             <p>Pré-lavagem com espuma (snow foam), pincelamento de emblemas, grades e rodas com produtos neutros que preservam o verniz.</p>
@@ -1647,7 +1675,7 @@
     </div>
   </section>
 
-  <!-- SEÇÃO REPERTÓRIO & VITRINE (COM FOTOS REAIS ENVIADAS + SERVIÇO REPRESENTADO) -->
+  <!-- SEÇÃO REPERTÓRIO & VITRINE -->
   <section id="vitrine">
     <div class="container">
       <div class="section-header">
@@ -1668,7 +1696,7 @@
       </div>
 
       <div class="showcase-grid" id="showcase-grid">
-        <!-- ITEM 1: LAVAGEM TÉCNICA DETALHADA (SNOW FOAM) - FOTO REAL 4 -->
+        <!-- ITEM 1: LAVAGEM TÉCNICA DETALHADA (SNOW FOAM) -->
         <article class="showcase-card" data-category="estetica">
           <div class="showcase-media">
             <img
@@ -1686,14 +1714,14 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Na loja física</span>
-              <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Lavagem%20T%C3%A9cnica%20Detalhada." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Lavagem%20T%C3%A9cnica%20Detalhada." data-wpp="estetica1" data-msg="Olá! Vi a vitrine e quero orçamento para Lavagem Técnica Detalhada." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Solicitar este serviço &rarr;
               </a>
             </div>
           </div>
         </article>
 
-        <!-- ITEM 2: LIMPEZA TÉCNICA DE MOTOR - FOTO REAL 2 -->
+        <!-- ITEM 2: LIMPEZA TÉCNICA DE MOTOR -->
         <article class="showcase-card" data-category="estetica">
           <div class="showcase-media">
             <img
@@ -1711,14 +1739,14 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Na loja física</span>
-              <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Limpeza%20T%C3%A9cnica%20de%20Motor." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Limpeza%20T%C3%A9cnica%20de%20Motor." data-wpp="estetica1" data-msg="Olá! Vi a vitrine e quero orçamento para Limpeza Técnica de Motor." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Solicitar este serviço &rarr;
               </a>
             </div>
           </div>
         </article>
 
-        <!-- ITEM 3: HIGIENIZAÇÃO INTERNA - FOTO REAL 3 -->
+        <!-- ITEM 3: HIGIENIZAÇÃO INTERNA -->
         <article class="showcase-card" data-category="estetica">
           <div class="showcase-media">
             <img
@@ -1736,7 +1764,7 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Na loja física</span>
-              <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Higieniza%C3%A7%C3%A3o%20Interna." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Higieniza%C3%A7%C3%A3o%20Interna." data-wpp="estetica2" data-msg="Olá! Vi a vitrine e quero orçamento para Higienização Interna." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Solicitar este serviço &rarr;
               </a>
             </div>
@@ -1761,7 +1789,7 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Atendimento móvel 24h</span>
-              <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20c%C3%B3pia%20ou%20codifica%C3%A7%C3%A3o%20de%20chave%20automotiva." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20c%C3%B3pia%20ou%20codifica%C3%A7%C3%A3o%20de%20chave%20automotiva." data-wpp="chaveiro" data-msg="Olá! Preciso de cópia ou codificação de chave automotiva." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Acionar Chaveiro &rarr;
               </a>
             </div>
@@ -1786,7 +1814,7 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Na loja física</span>
-              <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Remo%C3%A7%C3%A3o%20de%20Chuva%20%C3%81cida." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Vi%20a%20vitrine%20e%20quero%20or%C3%A7amento%20para%20Remo%C3%A7%C3%A3o%20de%20Chuva%20%C3%81cida." data-wpp="estetica2" data-msg="Olá! Vi a vitrine e quero orçamento para Remoção de Chuva Ácida." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Solicitar este serviço &rarr;
               </a>
             </div>
@@ -1811,7 +1839,7 @@
             </div>
             <div class="showcase-footer">
               <span style="color: var(--text-muted);">Plantão 24h</span>
-              <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20abertura%20emergencial%20agora." target="_blank" rel="noopener noreferrer" class="showcase-link">
+              <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20abertura%20emergencial%20agora." data-wpp="chaveiro" data-msg="Olá! Preciso de abertura emergencial agora." target="_blank" rel="noopener noreferrer" class="showcase-link">
                 Chamar Plantão &rarr;
               </a>
             </div>
@@ -1838,26 +1866,26 @@
           <div class="card" id="whatsapp-channels-card" style="margin-bottom: 18px;">
             <h3 style="margin-bottom: 14px;">Fale Direto no WhatsApp</h3>
 
-            <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20atendimento%20Chaveiro%2024h." target="_blank" rel="noopener noreferrer" class="contact-channel">
+            <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Preciso%20de%20atendimento%20Chaveiro%2024h." data-wpp="chaveiro" data-msg="Olá! Preciso de atendimento Chaveiro 24h." target="_blank" rel="noopener noreferrer" class="contact-channel">
               <div>
                 <span class="channel-role">Plantão Chaveiro 24h (A Domicílio)</span>
-                <span class="channel-number">(11) 94073-2831</span>
+                <span class="channel-number" data-wpp-display="chaveiro">(11) 94073-2831</span>
               </div>
               <span class="channel-tag">Chamar 24h</span>
             </a>
 
-            <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Est%C3%A9tica%20Automotiva." target="_blank" rel="noopener noreferrer" class="contact-channel">
+            <a href="https://wa.me/5511989570927?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Est%C3%A9tica%20Automotiva." data-wpp="estetica1" data-msg="Olá! Gostaria de agendar Estética Automotiva." target="_blank" rel="noopener noreferrer" class="contact-channel">
               <div>
                 <span class="channel-role">Estética Automotiva • Atendimento 1</span>
-                <span class="channel-number">(11) 98957-0927</span>
+                <span class="channel-number" data-wpp-display="estetica1">(11) 98957-0927</span>
               </div>
               <span class="channel-tag">Orçamento</span>
             </a>
 
-            <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Est%C3%A9tica%20Automotiva." target="_blank" rel="noopener noreferrer" class="contact-channel" style="margin-bottom: 0;">
+            <a href="https://wa.me/5511947912315?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20Est%C3%A9tica%20Automotiva." data-wpp="estetica2" data-msg="Olá! Gostaria de agendar Estética Automotiva." target="_blank" rel="noopener noreferrer" class="contact-channel" style="margin-bottom: 0;">
               <div>
                 <span class="channel-role">Estética Automotiva • Atendimento 2</span>
-                <span class="channel-number">(11) 94791-2315</span>
+                <span class="channel-number" data-wpp-display="estetica2">(11) 94791-2315</span>
               </div>
               <span class="channel-tag">Orçamento</span>
             </a>
@@ -1870,7 +1898,7 @@
               <strong style="color: #fff;">Estética Automotiva:</strong> Horário comercial (atendimento presencial na unidade).
             </p>
             <div style="margin-top: 14px;">
-              <a href="https://www.instagram.com/fd7garagem" target="_blank" rel="noopener noreferrer" style="color: var(--red); font-weight: 700; font-size: 0.9rem;">
+              <a href="https://www.instagram.com/fd7garagem/" data-instagram-link target="_blank" rel="noopener noreferrer" style="color: var(--red); font-weight: 700; font-size: 0.9rem;">
                 Acompanhe resultados reais no Instagram: @fd7garagem &rarr;
               </a>
             </div>
@@ -1880,6 +1908,7 @@
         <!-- MAPA INTERATIVO GOOGLE MAPS -->
         <div class="map-wrapper">
           <iframe
+            id="google-maps-iframe"
             title="Mapa Garagem FD7 - Travessa Bandeira Branca, 126"
             src="https://maps.google.com/maps?q=Travessa%20Bandeira%20Branca,%20126,%2008344-110,%20Sao%20Paulo&t=&z=16&ie=UTF8&iwloc=&output=embed"
             width="100%"
@@ -1891,10 +1920,11 @@
           </iframe>
           <div class="map-footer-bar">
             <div>
-              <strong style="display: block; font-size: 0.92rem; color: #fff;">Travessa Bandeira Branca, 126</strong>
-              <span style="font-size: 0.82rem; color: var(--text-muted);">São Mateus, São Paulo – SP • CEP 08344-110</span>
+              <strong id="map-address-title" style="display: block; font-size: 0.92rem; color: #fff;">Travessa Bandeira Branca, 126</strong>
+              <span id="map-address-sub" style="font-size: 0.82rem; color: var(--text-muted);">São Mateus, São Paulo – SP • CEP 08344-110</span>
             </div>
             <a
+              id="google-maps-link"
               href="https://www.google.com/maps/search/?api=1&query=Travessa+Bandeira+Branca,+126+-+08344-110,+Sao+Paulo+-+SP"
               target="_blank"
               rel="noopener noreferrer"
@@ -1919,7 +1949,7 @@
         <div>
           <div class="footer-title">Endereço da Unidade</div>
           <p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Travessa+Bandeira+Branca,+126+-+08344-110,+Sao+Paulo+-+SP" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">
+            <a id="footer-address-link" href="https://www.google.com/maps/search/?api=1&query=Travessa+Bandeira+Branca,+126+-+08344-110,+Sao+Paulo+-+SP" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">
               Travessa Bandeira Branca, 126<br />
               São Mateus – São Paulo, SP<br />
               CEP 08344-110
@@ -1929,9 +1959,9 @@
         <div>
           <div class="footer-title">Dados da Empresa</div>
           <p>
-            CNPJ: 63.213.695/0001-00<br />
-            Instagram: <a href="https://www.instagram.com/fd7garagem" target="_blank" rel="noopener noreferrer" style="color: #fff;">@fd7garagem</a><br />
-            Plantão 24h: (11) 94073-2831
+            CNPJ: <span id="footer-cnpj">63.213.695/0001-00</span><br />
+            Instagram: <a href="https://www.instagram.com/fd7garagem/" data-instagram-link target="_blank" rel="noopener noreferrer" style="color: #fff;">@fd7garagem</a><br />
+            Plantão 24h: <span data-wpp-display="chaveiro">(11) 94073-2831</span>
           </p>
         </div>
       </div>
@@ -1944,7 +1974,7 @@
   </footer>
 
   <!-- BOTÃO FLUTUANTE WHATSAPP -->
-  <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Garagem%20FD7." target="_blank" rel="noopener noreferrer" class="floating-wa">
+  <a href="https://wa.me/5511940732831?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Garagem%20FD7." data-wpp="chaveiro" data-msg="Olá! Vim pelo site da Garagem FD7." target="_blank" rel="noopener noreferrer" class="floating-wa">
     WhatsApp FD7
   </a>
 
@@ -1989,9 +2019,28 @@
         .replace(/'/g, '&#039;');
     }
 
+    function sanitizeDigits(val, fallback) {
+      const digits = String(val || '').replace(/\D/g, '');
+      return digits || fallback;
+    }
+
+    function formatPhoneBR(digits) {
+      const d = sanitizeDigits(digits, '');
+      if (d.length === 13 && d.startsWith('55')) {
+        return `(${d.slice(2, 4)}) ${d.slice(4, 9)}-${d.slice(9)}`;
+      }
+      if (d.length === 12 && d.startsWith('55')) {
+        return `(${d.slice(2, 4)}) ${d.slice(4, 8)}-${d.slice(8)}`;
+      }
+      if (d.length === 11) {
+        return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+      }
+      return d || '(11) 94073-2831';
+    }
+
     function formatBRL(val) {
-      const num = Number(val);
-      if (isNaN(num)) return String(val);
+      const num = Number(String(val ?? '').replace(',', '.'));
+      if (isNaN(num)) return String(val ?? '');
       return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
@@ -2001,6 +2050,137 @@
       return { integer: parts[0], cents: ',' + (parts[1] || '00') };
     }
 
+    // Aplica os dados da tabela 'configuracoes' em todos os pontos da página
+    function applyConfiguracoesFromSupabase(cfg) {
+      if (!cfg) return;
+
+      const phones = {
+        chaveiro: sanitizeDigits(cfg.whatsapp_chaveiro, '5511940732831'),
+        estetica1: sanitizeDigits(cfg.whatsapp_estetica_1, '5511989570927'),
+        estetica2: sanitizeDigits(cfg.whatsapp_estetica_2, '5511947912315')
+      };
+
+      document.querySelectorAll('[data-wpp]').forEach((el) => {
+        const role = el.getAttribute('data-wpp');
+        const phone = phones[role] || phones.chaveiro;
+        const msg = el.getAttribute('data-msg') || 'Olá! Vim pelo site da Garagem FD7.';
+        el.href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      });
+
+      document.querySelectorAll('[data-wpp-display]').forEach((el) => {
+        const role = el.getAttribute('data-wpp-display');
+        const phone = phones[role] || phones.chaveiro;
+        el.textContent = formatPhoneBR(phone);
+      });
+
+      if (cfg.instagram_url) {
+        document.querySelectorAll('[data-instagram-link]').forEach((el) => {
+          el.href = cfg.instagram_url;
+        });
+      }
+
+      if (cfg.cnpj) {
+        const cnpjEl = document.getElementById('footer-cnpj');
+        if (cnpjEl) cnpjEl.textContent = cfg.cnpj;
+      }
+
+      if (cfg.endereco) {
+        const mapsQuery = encodeURIComponent(cfg.endereco);
+        const mapsLink = document.getElementById('google-maps-link');
+        const footerLink = document.getElementById('footer-address-link');
+        const mapTitle = document.getElementById('map-address-title');
+        const mapSub = document.getElementById('map-address-sub');
+        const aboutEnd = document.getElementById('about-endereco-text');
+
+        if (mapsLink) mapsLink.href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+        if (footerLink) {
+          footerLink.href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+          footerLink.textContent = cfg.endereco;
+        }
+        const parts = cfg.endereco.split(' - ');
+        if (mapTitle) mapTitle.textContent = parts[0] || cfg.endereco;
+        if (mapSub && parts.length > 1) mapSub.textContent = parts.slice(1).join(' • ');
+        if (aboutEnd) aboutEnd.textContent = `Atendimento presencial em horário comercial: ${parts[0] || cfg.endereco}.`;
+      }
+
+      if (cfg.hero_titulo) {
+        const sloganEl = document.getElementById('hero-slogan');
+        if (sloganEl) {
+          const raw = String(cfg.hero_titulo).trim();
+          const words = raw.split(' ');
+          if (words.length >= 4) {
+            const splitIdx = Math.ceil(words.length / 2);
+            sloganEl.innerHTML = `${escapeHtml(words.slice(0, splitIdx).join(' '))} <span>${escapeHtml(words.slice(splitIdx).join(' '))}</span>`;
+          } else {
+            sloganEl.textContent = raw;
+          }
+        }
+      }
+
+      if (cfg.hero_imagem_url) {
+        const heroEl = document.getElementById('hero-section');
+        if (heroEl) {
+          heroEl.style.backgroundImage = `url('${cfg.hero_imagem_url.replace(/'/g, "\'")}')`;
+        }
+      }
+    }
+
+    // Renderiza a tabela 'servicos_chaveiro' (se houver registros ativos no banco)
+    function renderChaveiroFromSupabase(servicos, wppChaveiro) {
+      if (!Array.isArray(servicos) || servicos.length === 0) return;
+      const phone = sanitizeDigits(wppChaveiro, '5511940732831');
+
+      const regulares = servicos.filter(s => !s.destaque_vw);
+      const especiaisVW = servicos.filter(s => Boolean(s.destaque_vw));
+
+      if (regulares.length > 0) {
+        const grid = document.getElementById('chaveiro-services-grid');
+        if (grid) {
+          grid.innerHTML = regulares.map((s, idx) => `
+            <div class="card">
+              <div class="card-icon">0${idx + 1}</div>
+              <h3>${escapeHtml(s.titulo)}</h3>
+              <p>${escapeHtml(s.descricao || '')}</p>
+            </div>
+          `).join('');
+        }
+      }
+
+      if (especiaisVW.length > 0) {
+        const vwContainer = document.getElementById('chaveiro-vw-container');
+        if (vwContainer) {
+          vwContainer.innerHTML = especiaisVW.map(s => {
+            const msg = encodeURIComponent(`Olá! Gostaria de um orçamento para ${s.titulo} na Garagem FD7.`);
+            return `
+              <div class="vw-card">
+                <div class="vw-card-main">
+                  <div class="vw-logo-box" aria-hidden="true">
+                    <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="50" cy="50" r="45" stroke="#60a5fa" stroke-width="6"/>
+                      <circle cx="50" cy="50" r="37" stroke="#93c5fd" stroke-width="2.5"/>
+                      <path d="M31 24L50 62L69 24" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M22 43L41 80L50 62L59 80L78 43" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <span class="vw-tag">Especialidade Automotiva • Linha VW</span>
+                    <h3>${escapeHtml(s.titulo)}</h3>
+                    <p>${escapeHtml(s.descricao || '')}</p>
+                    <span class="vw-cert-pill">✓ Serviço especializado com certificado</span>
+                  </div>
+                </div>
+                <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="white-space: nowrap;">
+                  Consultar Linha VW
+                </a>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    }
+
+    // Renderiza a tabela 'fd7_pacotes' usando as colunas reais:
+    // id (int), tier, nome, titulo, subtitulo, preco_carro, preco_pickup, itens (jsonb), destaque, whatsapp, ordem, ativo
     function renderPackagesFromSupabase(pacotes, wppEstetica1, wppEstetica2) {
       if (!Array.isArray(pacotes) || pacotes.length === 0) return;
       const grid = document.getElementById('packages-grid');
@@ -2008,19 +2188,22 @@
 
       grid.innerHTML = pacotes.map((p, idx) => {
         const isFeatured = Boolean(p.destaque);
+        const nomePacote = p.nome || p.titulo || `Pacote ${idx + 1}`;
+        const tierPacote = p.tier || `Pacote 0${idx + 1}`;
         const parts = splitBRLParts(p.preco_carro);
-        const phone = idx === 1 ? (wppEstetica1 || '5511989570927') : (wppEstetica2 || '5511947912315');
-        const msg = encodeURIComponent(`Olá! Gostaria de agendar o ${p.tier_label || 'Pacote ' + (idx + 1)} - ${p.titulo} na Garagem FD7.`);
+        const defaultWpp = idx === 1 ? (wppEstetica1 || '5511989570927') : (wppEstetica2 || '5511947912315');
+        const phone = sanitizeDigits(p.whatsapp, sanitizeDigits(defaultWpp, '5511947912315'));
+        const msg = encodeURIComponent(`Olá! Gostaria de agendar o ${tierPacote} - ${nomePacote} na Garagem FD7.`);
         const itens = Array.isArray(p.itens) ? p.itens : [];
 
         return `
           <div class="card package-card ${isFeatured ? 'featured' : ''}">
             <div>
               <div class="package-header-top">
-                <span class="package-tier">${escapeHtml(p.tier_label || 'Pacote 0' + (idx + 1))}</span>
+                <span class="package-tier">${escapeHtml(tierPacote)}</span>
                 ${isFeatured ? '<span class="package-badge">Mais Procurado</span>' : ''}
               </div>
-              <h3 class="package-title">${escapeHtml(p.titulo)}</h3>
+              <h3 class="package-title">${escapeHtml(nomePacote)}</h3>
               <p class="package-subtitle">${escapeHtml(p.subtitulo || '')}</p>
 
               <div class="package-price-box">
@@ -2043,23 +2226,26 @@
               </div>
 
               <ul class="package-list">
-                ${itens.map(item => `<li><span class="package-check">✓</span><span>${escapeHtml(item)}</span></li>`).join('')}
+                ${itens.map(item => {
+                  const label = typeof item === 'object' && item !== null ? (item.nome || '') : String(item || '');
+                  return `<li><span class="package-check">✓</span><span>${escapeHtml(label)}</span></li>`;
+                }).join('')}
               </ul>
             </div>
 
             <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="btn ${isFeatured ? 'btn-red' : 'btn-glass'}">
-              Agendar Pacote ${idx + 1}
+              Agendar ${escapeHtml(tierPacote)}
             </a>
           </div>
         `;
       }).join('');
 
-      if (table && pacotes.length >= 3) {
+      if (table && pacotes.length > 0) {
         table.innerHTML = `
           <thead>
             <tr>
               <th>Tipo de Veículo</th>
-              ${pacotes.map((p, i) => `<th>Pacote ${i + 1} • ${escapeHtml(p.titulo)}</th>`).join('')}
+              ${pacotes.map((p, i) => `<th>${escapeHtml(p.tier || 'Pacote ' + (i + 1))} • ${escapeHtml(p.nome || p.titulo || '')}</th>`).join('')}
             </tr>
           </thead>
           <tbody>
@@ -2076,27 +2262,41 @@
       }
     }
 
-    function renderSpecialServicesFromSupabase(especiais, wppEstetica2) {
+    // Renderiza a tabela 'fd7_servicos_especiais' usando as colunas reais:
+    // id (text), titulo, subtitulo, badge, preco_destaque, itens (jsonb), whatsapp, ordem, ativo, valor_inicial (text), preco_max (numeric)
+    function renderSpecialServicesFromSupabase(especiais, wppEstetica1) {
       if (!Array.isArray(especiais) || especiais.length === 0) return;
       const grid = document.getElementById('special-services-grid');
-      const phone = wppEstetica2 || '5511947912315';
 
       grid.innerHTML = especiais.map((s, idx) => {
-        const isMicro = s.tipo === 'micro_servicos';
         const itens = Array.isArray(s.itens) ? s.itens : [];
+        const hasMicroPrices = itens.some(it => typeof it === 'object' && it !== null && it.preco !== null && it.preco !== undefined && it.preco !== '');
+        const phone = sanitizeDigits(s.whatsapp, sanitizeDigits(wppEstetica1, '5511989570927'));
         const msg = encodeURIComponent(`Olá! Gostaria de um orçamento para ${s.titulo} na Garagem FD7.`);
 
+        const badgeText = s.badge || (hasMicroPrices ? 'Preço Variável' : 'Serviço Completo');
+        const hasMax = s.preco_max !== null && s.preco_max !== undefined && Number(s.preco_max) > 0;
+        const valIniNum = Number(String(s.valor_inicial ?? '').replace(',', '.'));
+
         let priceHeaderHtml = '';
-        if (isMicro) {
+        if (s.preco_destaque && String(s.preco_destaque).trim() !== '') {
+          priceHeaderHtml = `
+            <span class="price-from-label">${hasMicroPrices || hasMax ? 'Faixa de investimento' : 'Valor a partir de'}</span>
+            <div class="variable-price-range">${escapeHtml(s.preco_destaque)}</div>
+            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">${hasMicroPrices ? 'Valores por micro-serviço ou combo completo:' : 'Pacote completo conforme avaliação do veículo:'}</span>
+          `;
+        } else if (hasMicroPrices || hasMax) {
+          const minFmt = !isNaN(valIniNum) && valIniNum > 0 ? formatBRL(valIniNum) : '40,00';
+          const maxFmt = hasMax ? formatBRL(s.preco_max) : '410,00';
           priceHeaderHtml = `
             <span class="price-from-label">Faixa de investimento</span>
             <div class="variable-price-range">
-              <span>R$</span>${formatBRL(s.preco_min)} – <span>R$</span>${formatBRL(s.preco_max)}
+              <span>R$</span>${minFmt} – <span>R$</span>${maxFmt}
             </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">${escapeHtml(s.nota_preco || 'Valores por micro-serviço ou combo completo:')}</span>
+            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Valores por micro-serviço ou combo completo:</span>
           `;
         } else {
-          const parts = splitBRLParts(s.preco_min);
+          const parts = splitBRLParts(!isNaN(valIniNum) && valIniNum > 0 ? valIniNum : 70);
           priceHeaderHtml = `
             <span class="price-from-label">Valor cheio a partir de</span>
             <div class="price-main">
@@ -2104,26 +2304,33 @@
               <span class="amount">${parts.integer}</span>
               <span class="cents">${parts.cents}</span>
             </div>
-            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">${escapeHtml(s.nota_preco || 'Pacote completo incluso (conforme o estado do veículo):')}</span>
+            <span style="font-size: 0.78rem; color: var(--text-muted); display: block;">Pacote completo incluso (conforme o estado do veículo):</span>
           `;
         }
 
         let listHtml = '';
-        if (isMicro) {
+        if (hasMicroPrices) {
           listHtml = `
             <ul class="micro-service-list">
-              ${itens.map(it => `
-                <li class="micro-service-item">
-                  <span class="micro-service-name"><span class="package-check">✓</span><span>${escapeHtml(it.nome || it)}</span></span>
-                  <span class="micro-service-price">${it.preco ? 'R$ ' + formatBRL(it.preco) : 'Sob consulta'}</span>
-                </li>
-              `).join('')}
+              ${itens.map(it => {
+                const nome = typeof it === 'object' && it !== null ? (it.nome || '') : String(it || '');
+                const preco = typeof it === 'object' && it !== null ? it.preco : null;
+                return `
+                  <li class="micro-service-item">
+                    <span class="micro-service-name"><span class="package-check">✓</span><span>${escapeHtml(nome)}</span></span>
+                    <span class="micro-service-price">${preco !== null && preco !== undefined && preco !== '' ? 'R$ ' + formatBRL(preco) : 'Sob consulta'}</span>
+                  </li>
+                `;
+              }).join('')}
             </ul>
           `;
         } else {
           listHtml = `
             <ul class="package-list">
-              ${itens.map(it => `<li><span class="package-check">✓</span><span>${escapeHtml(it.nome || it)}</span></li>`).join('')}
+              ${itens.map(it => {
+                const nome = typeof it === 'object' && it !== null ? (it.nome || '') : String(it || '');
+                return `<li><span class="package-check">✓</span><span>${escapeHtml(nome)}</span></li>`;
+              }).join('')}
             </ul>
           `;
         }
@@ -2132,8 +2339,8 @@
           <div class="card package-card variable-card">
             <div>
               <div class="package-header-top">
-                <span class="package-tier" style="color: var(--amber);">${escapeHtml(s.tier_label || 'Serviço Especial 0' + (idx + 1))}</span>
-                <span class="variable-badge">${escapeHtml(s.badge_label || (isMicro ? 'Preço Variável' : 'Serviço Completo'))}</span>
+                <span class="package-tier" style="color: var(--amber);">Serviço Especial 0${idx + 1}</span>
+                <span class="variable-badge">${escapeHtml(badgeText)}</span>
               </div>
               <h3 class="package-title">${escapeHtml(s.titulo)}</h3>
               <p class="package-subtitle">${escapeHtml(s.subtitulo || '')}</p>
@@ -2146,20 +2353,42 @@
             </div>
 
             <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
-              ${escapeHtml(s.cta_label || 'Consultar ' + s.titulo)}
+              Consultar ${escapeHtml(s.titulo)}
             </a>
           </div>
         `;
       }).join('');
     }
 
+    // Renderiza a tabela 'servicos_estetica' (serviços avulsos/adicionais)
+    function renderExtraEsteticaFromSupabase(servicos) {
+      if (!Array.isArray(servicos) || servicos.length === 0) return;
+      const grid = document.getElementById('estetica-extra-services-grid');
+      if (!grid) return;
+
+      grid.innerHTML = servicos.map(s => `
+        <div class="card">
+          ${(s.tag || s.preco_texto) ? `
+            <div class="service-extra-meta">
+              ${s.tag ? `<span class="service-extra-tag">${escapeHtml(s.tag)}</span>` : '<span></span>'}
+              ${s.preco_texto ? `<span class="service-extra-price">${escapeHtml(s.preco_texto)}</span>` : ''}
+            </div>
+          ` : ''}
+          <h3>${escapeHtml(s.titulo)}</h3>
+          <p>${escapeHtml(s.descricao || '')}</p>
+        </div>
+      `).join('');
+    }
+
+    // Renderiza a tabela 'fd7_vitrine' usando as colunas reais:
+    // id (uuid), categoria, titulo, descricao, imagem_url, ordem, ativo, created_at
     function renderVitrineFromSupabase(items, cfg) {
       if (!Array.isArray(items) || items.length === 0) return;
       const grid = document.getElementById('showcase-grid');
       const tabs = document.getElementById('filter-tabs');
 
       const totalCount = items.length;
-      const esteticaCount = items.filter(i => i.categoria === 'estetica').length;
+      const esteticaCount = items.filter(i => (i.categoria || 'estetica') === 'estetica').length;
       const chaveiroCount = items.filter(i => i.categoria === 'chaveiro').length;
 
       if (tabs) {
@@ -2171,19 +2400,21 @@
       }
 
       grid.innerHTML = items.map(item => {
-        const isChaveiro = item.categoria === 'chaveiro';
+        const cat = item.categoria || 'estetica';
+        const isChaveiro = cat === 'chaveiro';
         const catLabel = isChaveiro ? 'Chaveiro 24h' : 'Estética Automotiva';
-        const isReal = item.tipo_registro !== 'demo';
-        const phone = isChaveiro ? (cfg?.wpp_chaveiro || '5511940732831') : (cfg?.wpp_estetica_1 || '5511989570927');
-        const msg = encodeURIComponent(item.mensagem_whatsapp || `Olá! Vi na vitrine o serviço "${item.titulo}" e gostaria de um orçamento.`);
-        const hiddenClass = (currentFilter !== 'todos' && currentFilter !== item.categoria) ? 'hidden' : '';
+        const phone = isChaveiro
+          ? sanitizeDigits(cfg?.whatsapp_chaveiro, '5511940732831')
+          : sanitizeDigits(cfg?.whatsapp_estetica_1, '5511989570927');
+        const msg = encodeURIComponent(`Olá! Vi na vitrine o serviço "${item.titulo}" e gostaria de um orçamento.`);
+        const hiddenClass = (currentFilter !== 'todos' && currentFilter !== cat) ? 'hidden' : '';
 
         return `
-          <article class="showcase-card ${hiddenClass}" data-category="${escapeHtml(item.categoria)}">
+          <article class="showcase-card ${hiddenClass}" data-category="${escapeHtml(cat)}">
             <div class="showcase-media">
               <img src="${escapeHtml(item.imagem_url)}" alt="${escapeHtml(item.titulo)}" loading="lazy" />
               <span class="showcase-category-tag">${catLabel}</span>
-              <span class="${isReal ? 'showcase-real-tag' : 'showcase-demo-tag'}">${isReal ? 'Serviço FD7' : 'Foto Demo'}</span>
+              <span class="showcase-real-tag">Serviço FD7</span>
             </div>
             <div class="showcase-body">
               <div>
@@ -2192,7 +2423,7 @@
                 <p>${escapeHtml(item.descricao || '')}</p>
               </div>
               <div class="showcase-footer">
-                <span style="color: var(--text-muted);">${escapeHtml(item.local_atendimento || (isChaveiro ? 'Atendimento móvel 24h' : 'Na loja física'))}</span>
+                <span style="color: var(--text-muted);">${isChaveiro ? 'Atendimento móvel 24h' : 'Na loja física'}</span>
                 <a href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer" class="showcase-link">
                   ${isChaveiro ? 'Acionar Chaveiro' : 'Solicitar este serviço'} &rarr;
                 </a>
@@ -2210,21 +2441,34 @@
       if (!sb) return;
 
       try {
-        const [cfgRes, pacRes, espRes, vitRes] = await Promise.all([
-          sb.from('fd7_config').select('*').limit(1).maybeSingle(),
-          sb.from('fd7_pacotes').select('*').order('ordem', { ascending: true }),
-          sb.from('fd7_servicos_especiais').select('*').order('ordem', { ascending: true }),
-          sb.from('fd7_vitrine').select('*').order('ordem', { ascending: true }).order('created_at', { ascending: false })
+        const [cfgRes, chavRes, pacRes, espRes, estExtraRes, vitRes] = await Promise.all([
+          sb.from('configuracoes').select('*').eq('id', 1).maybeSingle(),
+          sb.from('servicos_chaveiro').select('*').eq('ativo', true).order('ordem', { ascending: true }),
+          sb.from('fd7_pacotes').select('*').eq('ativo', true).order('ordem', { ascending: true }),
+          sb.from('fd7_servicos_especiais').select('*').eq('ativo', true).order('ordem', { ascending: true }),
+          sb.from('servicos_estetica').select('*').eq('ativo', true).order('ordem', { ascending: true }),
+          sb.from('fd7_vitrine').select('*').eq('ativo', true).order('ordem', { ascending: true }).order('created_at', { ascending: false })
         ]);
 
         const cfg = cfgRes?.data || null;
+        if (cfg) {
+          applyConfiguracoesFromSupabase(cfg);
+        }
+
+        if (chavRes?.data && chavRes.data.length > 0) {
+          renderChaveiroFromSupabase(chavRes.data, cfg?.whatsapp_chaveiro);
+        }
 
         if (pacRes?.data && pacRes.data.length > 0) {
-          renderPackagesFromSupabase(pacRes.data, cfg?.wpp_estetica_1, cfg?.wpp_estetica_2);
+          renderPackagesFromSupabase(pacRes.data, cfg?.whatsapp_estetica_1, cfg?.whatsapp_estetica_2);
         }
 
         if (espRes?.data && espRes.data.length > 0) {
-          renderSpecialServicesFromSupabase(espRes.data, cfg?.wpp_estetica_2);
+          renderSpecialServicesFromSupabase(espRes.data, cfg?.whatsapp_estetica_1);
+        }
+
+        if (estExtraRes?.data && estExtraRes.data.length > 0) {
+          renderExtraEsteticaFromSupabase(estExtraRes.data);
         }
 
         if (vitRes?.data && vitRes.data.length > 0) {

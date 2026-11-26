@@ -29,7 +29,7 @@
       line-height: 1.5;
       padding-bottom: 60px;
     }
-    .container { max-width: 1060px; margin: 0 auto; padding: 0 18px; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 18px; }
     .topbar {
       background: rgba(9, 9, 11, 0.92);
       border-bottom: 1px solid var(--border);
@@ -80,6 +80,7 @@
     .btn-ghost:hover { border-color: #52525b; }
     .btn-danger { background: rgba(225, 29, 29, 0.14); border: 1px solid rgba(225, 29, 29, 0.35); color: #fca5a5; padding: 7px 12px; font-size: 0.78rem; }
     .btn-danger:hover { background: var(--red); color: #fff; }
+    .btn-sm { padding: 7px 12px; font-size: 0.78rem; }
 
     /* LOGIN */
     .login-wrap {
@@ -110,7 +111,14 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
-    input, select, textarea {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="url"],
+    input[type="file"],
+    select,
+    textarea {
       width: 100%;
       background: var(--bg-input);
       border: 1px solid var(--border);
@@ -125,6 +133,28 @@
       border-color: var(--red);
     }
     textarea { min-height: 82px; resize: vertical; }
+
+    .checkbox-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e4e4e7;
+      cursor: pointer;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--red);
+    }
 
     /* TABS */
     .tabs {
@@ -163,9 +193,11 @@
 
     .grid-2 { display: grid; grid-template-columns: 1fr; gap: 14px; }
     .grid-3 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr; gap: 14px; }
     @media (min-width: 768px) {
       .grid-2 { grid-template-columns: repeat(2, 1fr); }
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
     }
 
     .vitrine-item {
@@ -190,6 +222,11 @@
       justify-content: space-between;
       gap: 10px;
     }
+    .vitrine-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
     .pill {
       display: inline-block;
       font-size: 0.68rem;
@@ -200,7 +237,10 @@
       background: rgba(225, 29, 29, 0.16);
       color: #fca5a5;
     }
-    .pill.demo { background: rgba(245, 158, 11, 0.18); color: #fbbf24; }
+    .pill.inactive {
+      background: rgba(161, 161, 170, 0.18);
+      color: #a1a1aa;
+    }
 
     .toast {
       position: fixed;
@@ -221,7 +261,7 @@
 
     .micro-row {
       display: grid;
-      grid-template-columns: 1fr 110px 36px;
+      grid-template-columns: 1fr 120px 36px;
       gap: 8px;
       margin-bottom: 8px;
       align-items: center;
@@ -256,7 +296,7 @@
   <div id="login-view" class="login-wrap">
     <div class="login-card">
       <h1>Acesso Restrito FD7</h1>
-      <p>Entre com o e-mail e senha cadastrados no Supabase para atualizar fotos, pacotes e preços do site.</p>
+      <p>Entre com o e-mail e senha cadastrados no Supabase para atualizar fotos, pacotes, preços e configurações do site.</p>
       <form id="login-form">
         <div class="field">
           <label for="login-email">E-mail</label>
@@ -276,54 +316,52 @@
   <!-- PAINEL LOGADO -->
   <main id="admin-view" class="container" style="display:none;">
     <div class="tabs">
-      <button class="tab-btn active" data-tab="tab-vitrine">1. Vitrine (Fotos &amp; Serviços)</button>
-      <button class="tab-btn" data-tab="tab-pacotes">2. Pacotes (1, 2 e 3)</button>
+      <button class="tab-btn active" data-tab="tab-vitrine">1. Vitrine (fd7_vitrine)</button>
+      <button class="tab-btn" data-tab="tab-pacotes">2. Pacotes (fd7_pacotes)</button>
       <button class="tab-btn" data-tab="tab-especiais">3. Serviços Especiais</button>
-      <button class="tab-btn" data-tab="tab-config">4. Contatos &amp; WhatsApp</button>
+      <button class="tab-btn" data-tab="tab-servicos">4. Serviços Chaveiro &amp; Estética</button>
+      <button class="tab-btn" data-tab="tab-config">5. Configurações Gerais</button>
     </div>
 
-    <!-- ABA 1: VITRINE -->
+    <!-- ABA 1: VITRINE (tabela: fd7_vitrine) -->
     <section id="tab-vitrine" class="panel active">
       <div class="card">
         <h2>Adicionar Nova Foto na Vitrine</h2>
-        <p class="sub">Envie fotos reais direto do celular ou computador. A imagem é comprimida automaticamente para carregar rápido no site.</p>
+        <p class="sub">Envie fotos reais direto do celular ou computador. A imagem é comprimida automaticamente e salva em <code>fd7_vitrine</code>.</p>
 
         <form id="vitrine-form">
-          <div class="grid-2">
+          <div class="grid-3">
             <div class="field">
-              <label>Título do Serviço</label>
+              <label for="vit-titulo">Título do Serviço</label>
               <input type="text" id="vit-titulo" placeholder="Ex: Polimento Técnico + Vitrificação" required />
             </div>
             <div class="field">
-              <label>Categoria</label>
+              <label for="vit-categoria">Categoria</label>
               <select id="vit-categoria">
                 <option value="estetica">Estética Automotiva</option>
                 <option value="chaveiro">Chaveiro 24h</option>
               </select>
             </div>
-          </div>
-
-          <div class="grid-2">
             <div class="field">
-              <label>Tipo de Selo</label>
-              <select id="vit-tipo">
-                <option value="real">Serviço FD7 (Foto Real)</option>
-                <option value="demo">Foto Demo (Ilustrativa)</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Local de Atendimento</label>
-              <input type="text" id="vit-local" value="Na loja física" placeholder="Ex: Na loja física ou Atendimento móvel 24h" />
+              <label for="vit-ordem">Ordem de Exibição</label>
+              <input type="number" id="vit-ordem" value="0" />
             </div>
           </div>
 
           <div class="field">
-            <label>Descrição do Serviço Executado</label>
+            <label for="vit-descricao">Descrição do Serviço Executado</label>
             <textarea id="vit-descricao" placeholder="Descreva brevemente o resultado e os cuidados aplicados..." required></textarea>
           </div>
 
+          <div class="checkbox-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="vit-ativo" checked />
+              <span>Publicar imediatamente (ativo no site)</span>
+            </label>
+          </div>
+
           <div class="field">
-            <label>Foto do Serviço (Celular ou Computador)</label>
+            <label for="vit-file">Foto do Serviço (Celular ou Computador)</label>
             <input type="file" id="vit-file" accept="image/*" required />
             <div class="preview-box" id="vit-preview-box">
               <img id="vit-preview-img" src="" alt="Prévia" />
@@ -335,18 +373,18 @@
       </div>
 
       <div class="card">
-        <h2>Itens Publicados na Vitrine</h2>
-        <p class="sub">Gerencie ou remova os cards que aparecem na seção "Na Prática: Foto e Serviço Executado".</p>
+        <h2>Itens Salvos na Vitrine</h2>
+        <p class="sub">Gerencie, oculte ou remova os cards da seção "Na Prática: Foto e Serviço Executado".</p>
         <div class="grid-3" id="admin-vitrine-list">
           <p style="color: var(--text-muted); font-size: 0.88rem;">Carregando vitrine...</p>
         </div>
       </div>
     </section>
 
-    <!-- ABA 2: PACOTES -->
+    <!-- ABA 2: PACOTES (tabela: fd7_pacotes) -->
     <section id="tab-pacotes" class="panel">
       <div class="card">
-        <h2>Editar Pacotes de Estética (1, 2 e 3)</h2>
+        <h2>Editar Pacotes de Estética (fd7_pacotes)</h2>
         <p class="sub">Ao salvar, tanto os cards quanto a tabela comparativa de Carro e Pick-up são atualizados automaticamente no site.</p>
         <div id="admin-pacotes-list">
           <p style="color: var(--text-muted); font-size: 0.88rem;">Carregando pacotes...</p>
@@ -354,38 +392,85 @@
       </div>
     </section>
 
-    <!-- ABA 3: SERVIÇOS ESPECIAIS -->
+    <!-- ABA 3: SERVIÇOS ESPECIAIS (tabela: fd7_servicos_especiais) -->
     <section id="tab-especiais" class="panel">
       <div class="card">
-        <h2>Serviços Especiais &amp; Micro-Serviços</h2>
-        <p class="sub">Edite os preços individuais da Higienização Interna e o valor inicial da Limpeza de Motor.</p>
+        <h2>Serviços Especiais &amp; Micro-Serviços (fd7_servicos_especiais)</h2>
+        <p class="sub">Edite os títulos, selos, preços de destaque, valores individuais e etapas dos serviços especiais.</p>
         <div id="admin-especiais-list">
           <p style="color: var(--text-muted); font-size: 0.88rem;">Carregando serviços especiais...</p>
         </div>
       </div>
     </section>
 
-    <!-- ABA 4: CONTATOS -->
+    <!-- ABA 4: SERVIÇOS CHAVEIRO & ESTÉTICA (tabelas: servicos_chaveiro, servicos_estetica) -->
+    <section id="tab-servicos" class="panel">
+      <div class="card">
+        <h2>Serviços de Chaveiro 24h (servicos_chaveiro)</h2>
+        <p class="sub">Gerencie os cards da seção Chaveiro Emergencial e o destaque da Linha Volkswagen.</p>
+        <div id="admin-chaveiro-list">
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Carregando serviços de chaveiro...</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Serviços Avulsos de Estética (servicos_estetica)</h2>
+        <p class="sub">Gerencie os serviços avulsos ou adicionais exibidos abaixo da tabela de pacotes.</p>
+        <div id="admin-estetica-extra-list">
+          <p style="color: var(--text-muted); font-size: 0.88rem;">Carregando serviços avulsos de estética...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA 5: CONFIGURAÇÕES GERAIS (tabela: configuracoes, id = 1) -->
     <section id="tab-config" class="panel">
       <div class="card">
-        <h2>Canais de WhatsApp da Garagem FD7</h2>
-        <p class="sub">Informe os números com DDI + DDD (somente dígitos, ex: 5511940732831).</p>
+        <h2>Configurações Gerais &amp; Canais de WhatsApp (configuracoes)</h2>
+        <p class="sub">Atualize os números de WhatsApp (somente dígitos com DDI + DDD, ex: 5511940732831), endereço, CNPJ, Instagram e título/imagem principal do site.</p>
         <form id="config-form">
           <div class="grid-3">
             <div class="field">
-              <label>WhatsApp Plantão Chaveiro 24h</label>
-              <input type="text" id="cfg-wpp-chaveiro" value="5511940732831" />
+              <label for="cfg-wpp-chaveiro">WhatsApp Plantão Chaveiro 24h</label>
+              <input type="text" id="cfg-wpp-chaveiro" value="5511940732831" required />
             </div>
             <div class="field">
-              <label>WhatsApp Estética 1</label>
-              <input type="text" id="cfg-wpp-est1" value="5511989570927" />
+              <label for="cfg-wpp-est1">WhatsApp Estética 1</label>
+              <input type="text" id="cfg-wpp-est1" value="5511989570927" required />
             </div>
             <div class="field">
-              <label>WhatsApp Estética 2</label>
-              <input type="text" id="cfg-wpp-est2" value="5511947912315" />
+              <label for="cfg-wpp-est2">WhatsApp Estética 2</label>
+              <input type="text" id="cfg-wpp-est2" value="5511947912315" required />
             </div>
           </div>
-          <button type="submit" class="btn btn-red">Salvar Contatos</button>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="cfg-instagram">URL do Instagram</label>
+              <input type="url" id="cfg-instagram" value="https://www.instagram.com/fd7garagem/" required />
+            </div>
+            <div class="field">
+              <label for="cfg-cnpj">CNPJ</label>
+              <input type="text" id="cfg-cnpj" value="63.213.695/0001-00" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cfg-endereco">Endereço Completo da Unidade</label>
+            <input type="text" id="cfg-endereco" value="Travessa Bandeira Branca, 126 - São Mateus, São Paulo - SP, 08344-110" required />
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="cfg-hero-titulo">Título / Slogan Principal (Hero)</label>
+              <input type="text" id="cfg-hero-titulo" value="Rápido, confiável e sempre com você." required />
+            </div>
+            <div class="field">
+              <label for="cfg-hero-img">URL da Imagem de Capa (Hero - opcional)</label>
+              <input type="text" id="cfg-hero-img" placeholder="Deixe em branco para usar a foto padrão embutida" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-red">Salvar Configurações</button>
         </form>
       </div>
     </section>
@@ -398,7 +483,7 @@
     const SUPABASE_ANON_KEY = "sb_publishable_XS6esOyU53ATfFVzE7zegA_IjrTbSc7";
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        function escapeHtml(str) {
+    function escapeHtml(str) {
       if (str === null || str === undefined) return '';
       return String(str)
         .replace(/&/g, '&amp;')
@@ -413,7 +498,7 @@
       el.textContent = msg;
       el.className = isError ? 'toast error' : 'toast';
       el.style.display = 'block';
-      setTimeout(() => { el.style.display = 'none'; }, 3600);
+      setTimeout(() => { el.style.display = 'none'; }, 3800);
     }
 
     // Tabs
@@ -509,7 +594,10 @@
       });
     }
 
-    // Upload new vitrine card
+    // =========================================================================
+    // 1. VITRINE (tabela: fd7_vitrine)
+    // Colunas reais: id, categoria, titulo, descricao, imagem_url, ordem, ativo
+    // =========================================================================
     document.getElementById('vitrine-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('btn-save-vitrine');
@@ -536,17 +624,17 @@
         const payload = {
           titulo: document.getElementById('vit-titulo').value.trim(),
           categoria: document.getElementById('vit-categoria').value,
-          tipo_registro: document.getElementById('vit-tipo').value,
-          local_atendimento: document.getElementById('vit-local').value.trim(),
           descricao: document.getElementById('vit-descricao').value.trim(),
           imagem_url: imageUrl,
-          ordem: 0
+          ordem: Number(document.getElementById('vit-ordem').value) || 0,
+          ativo: document.getElementById('vit-ativo').checked
         };
 
         const { error: insErr } = await sb.from('fd7_vitrine').insert([payload]);
         if (insErr) throw insErr;
 
         document.getElementById('vitrine-form').reset();
+        document.getElementById('vit-ativo').checked = true;
         document.getElementById('vit-preview-box').style.display = 'none';
         showToast('Foto publicada na vitrine com sucesso!');
         loadVitrineAdmin();
@@ -567,28 +655,48 @@
         .order('created_at', { ascending: false });
 
       if (error) {
-        list.innerHTML = `<p style="color:#fca5a5;">Erro ao carregar vitrine: ${error.message}</p>`;
+        list.innerHTML = `<p style="color:#fca5a5;">Erro ao carregar vitrine: ${escapeHtml(error.message)}</p>`;
         return;
       }
       if (!data || data.length === 0) {
-        list.innerHTML = `<p style="color:var(--text-muted);">Nenhum item salvo no banco ainda. Rode o arquivo supabase-setup.sql ou adicione uma foto acima.</p>`;
+        list.innerHTML = `<p style="color:var(--text-muted);">Nenhum item salvo em <code>fd7_vitrine</code> ainda. Adicione uma foto acima ou rode o script SQL.</p>`;
         return;
       }
 
-      list.innerHTML = data.map(item => `
-        <div class="vitrine-item">
-          <img src="${item.imagem_url}" alt="${item.titulo}" />
-          <div class="vitrine-item-body">
-            <div>
-              <span class="pill ${item.tipo_registro === 'demo' ? 'demo' : ''}">${item.categoria} • ${item.tipo_registro === 'demo' ? 'Demo' : 'Real'}</span>
-              <h3 style="font-size:0.98rem; margin:6px 0 4px;">${item.titulo}</h3>
-              <p style="font-size:0.8rem; color:var(--text-muted);">${item.descricao}</p>
+      list.innerHTML = data.map(item => {
+        const isAtivo = item.ativo !== false;
+        return `
+          <div class="vitrine-item">
+            <img src="${escapeHtml(item.imagem_url)}" alt="${escapeHtml(item.titulo)}" />
+            <div class="vitrine-item-body">
+              <div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                  <span class="pill">${escapeHtml(item.categoria || 'estetica')}</span>
+                  <span class="pill ${isAtivo ? '' : 'inactive'}">${isAtivo ? 'Ativo' : 'Oculto'}</span>
+                </div>
+                <h3 style="font-size:0.98rem; margin:6px 0 4px;">${escapeHtml(item.titulo)}</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted);">${escapeHtml(item.descricao || '')}</p>
+              </div>
+              <div class="vitrine-actions">
+                <button class="btn btn-ghost btn-sm" onclick="toggleVitrineAtivo('${escapeHtml(item.id)}', ${!isAtivo})">
+                  ${isAtivo ? 'Ocultar' : 'Ativar'}
+                </button>
+                <button class="btn btn-danger" onclick="deleteVitrineItem('${escapeHtml(item.id)}')">Excluir</button>
+              </div>
             </div>
-            <button class="btn btn-danger" onclick="deleteVitrineItem('${item.id}')">Excluir Card</button>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
+
+    window.toggleVitrineAtivo = async (id, novoStatus) => {
+      const { error } = await sb.from('fd7_vitrine').update({ ativo: novoStatus }).eq('id', id);
+      if (error) showToast('Erro ao atualizar status: ' + error.message, true);
+      else {
+        showToast(novoStatus ? 'Item ativado na vitrine.' : 'Item ocultado da vitrine.');
+        loadVitrineAdmin();
+      }
+    };
 
     window.deleteVitrineItem = async (id) => {
       if (!confirm('Deseja realmente remover este item da vitrine?')) return;
@@ -600,59 +708,107 @@
       }
     };
 
-    // Load & Save Packages
+    // =========================================================================
+    // 2. PACOTES (tabela: fd7_pacotes)
+    // Colunas reais: id (int), tier, nome, titulo, subtitulo, preco_carro, preco_pickup,
+    //                itens (jsonb), destaque, whatsapp, ordem, ativo, updated_at
+    // =========================================================================
     async function loadPacotesAdmin() {
       const container = document.getElementById('admin-pacotes-list');
       const { data, error } = await sb.from('fd7_pacotes').select('*').order('ordem', { ascending: true });
 
       if (error) {
-        container.innerHTML = `<p style="color:#fca5a5;">Erro: ${error.message}</p>`;
+        container.innerHTML = `<p style="color:#fca5a5;">Erro: ${escapeHtml(error.message)}</p>`;
         return;
       }
       if (!data || data.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted);">Nenhum pacote encontrado no banco. Execute o script supabase-setup.sql primeiro.</p>`;
+        container.innerHTML = `<p style="color:var(--text-muted);">Nenhum pacote encontrado em <code>fd7_pacotes</code>.</p>`;
         return;
       }
 
-      container.innerHTML = data.map(p => `
-        <div class="card" style="background:#18181c;">
-          <div class="grid-3">
-            <div class="field">
-              <label>Nome do Pacote</label>
-              <input type="text" id="pac-titulo-${p.id}" value="${p.titulo}" />
+      container.innerHTML = data.map(p => {
+        const nomeAtual = p.nome || p.titulo || '';
+        const itensTexto = (Array.isArray(p.itens) ? p.itens : [])
+          .map(it => typeof it === 'object' && it !== null ? (it.nome || '') : String(it || ''))
+          .join('
+');
+
+        return `
+          <div class="card" style="background:#18181c;">
+            <div class="grid-4">
+              <div class="field">
+                <label>Tier / Rótulo</label>
+                <input type="text" id="pac-tier-${p.id}" value="${escapeHtml(p.tier || '')}" placeholder="Ex: Pacote 01" />
+              </div>
+              <div class="field">
+                <label>Nome do Pacote</label>
+                <input type="text" id="pac-nome-${p.id}" value="${escapeHtml(nomeAtual)}" required />
+              </div>
+              <div class="field">
+                <label>Preço Carro (R$)</label>
+                <input type="number" step="0.01" id="pac-carro-${p.id}" value="${p.preco_carro ?? 0}" />
+              </div>
+              <div class="field">
+                <label>Preço Pick-up (R$)</label>
+                <input type="number" step="0.01" id="pac-pickup-${p.id}" value="${p.preco_pickup ?? 0}" />
+              </div>
             </div>
-            <div class="field">
-              <label>Preço Carro (R$)</label>
-              <input type="number" step="0.01" id="pac-carro-${p.id}" value="${p.preco_carro}" />
+
+            <div class="grid-3">
+              <div class="field">
+                <label>Subtítulo</label>
+                <input type="text" id="pac-sub-${p.id}" value="${escapeHtml(p.subtitulo || '')}" />
+              </div>
+              <div class="field">
+                <label>WhatsApp de Destino</label>
+                <input type="text" id="pac-wpp-${p.id}" value="${escapeHtml(p.whatsapp || '5511947912315')}" />
+              </div>
+              <div class="field">
+                <label>Ordem</label>
+                <input type="number" id="pac-ordem-${p.id}" value="${p.ordem ?? 0}" />
+              </div>
             </div>
-            <div class="field">
-              <label>Preço Pick-up (R$)</label>
-              <input type="number" step="0.01" id="pac-pickup-${p.id}" value="${p.preco_pickup}" />
+
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="pac-destaque-${p.id}" ${p.destaque ? 'checked' : ''} />
+                <span>Destaque ("Mais Procurado")</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="pac-ativo-${p.id}" ${p.ativo !== false ? 'checked' : ''} />
+                <span>Pacote Ativo no Site</span>
+              </label>
             </div>
+
+            <div class="field">
+              <label>Itens Inclusos (1 item por linha)</label>
+              <textarea id="pac-itens-${p.id}" style="min-height:130px;">${escapeHtml(itensTexto)}</textarea>
+            </div>
+            <button class="btn btn-red" onclick="savePacote(${p.id})">Salvar ${escapeHtml(nomeAtual)}</button>
           </div>
-          <div class="field">
-            <label>Subtítulo</label>
-            <input type="text" id="pac-sub-${p.id}" value="${p.subtitulo || ''}" />
-          </div>
-          <div class="field">
-            <label>Itens Inclusos (1 item por linha)</label>
-            <textarea id="pac-itens-${p.id}" style="min-height:130px;">${(p.itens || []).join('\n')}</textarea>
-          </div>
-          <button class="btn btn-red" onclick="savePacote('${p.id}')">Salvar ${p.titulo}</button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     window.savePacote = async (id) => {
       const itensRaw = document.getElementById(`pac-itens-${id}`).value;
-      const itens = itensRaw.split('\n').map(s => s.trim()).filter(Boolean);
+      const itens = itensRaw.split('
+').map(s => s.trim()).filter(Boolean);
+      const nomeVal = document.getElementById(`pac-nome-${id}`).value.trim();
 
       const payload = {
-        titulo: document.getElementById(`pac-titulo-${id}`).value.trim(),
-        subtitulo: document.getElementById(`pac-sub-${id}`).value.trim(),
-        preco_carro: Number(document.getElementById(`pac-carro-${id}`).value),
-        preco_pickup: Number(document.getElementById(`pac-pickup-${id}`).value),
-        itens
+        tier: document.getElementById(`pac-tier-${id}`).value.trim() || null,
+        nome: nomeVal,
+        titulo: nomeVal,
+        subtitulo: document.getElementById(`pac-sub-${id}`).value.trim() || null,
+        preco_carro: Number(document.getElementById(`pac-carro-${id}`).value) || 0,
+        preco_pickup: Number(document.getElementById(`pac-pickup-${id}`).value) || 0,
+        whatsapp: document.getElementById(`pac-wpp-${id}`).value.replace(/\D/g, '') || '5511947912315',
+        ordem: Number(document.getElementById(`pac-ordem-${id}`).value) || 0,
+        destaque: document.getElementById(`pac-destaque-${id}`).checked,
+        ativo: document.getElementById(`pac-ativo-${id}`).checked,
+        itens,
+        updated_at: new Date().toISOString()
       };
 
       const { error } = await sb.from('fd7_pacotes').update(payload).eq('id', id);
@@ -660,87 +816,121 @@
       else showToast('Pacote atualizado no site!');
     };
 
-    // Load & Save Special Services
+    // =========================================================================
+    // 3. SERVIÇOS ESPECIAIS (tabela: fd7_servicos_especiais)
+    // Colunas reais: id (text), titulo, subtitulo, badge, preco_destaque,
+    //                itens (jsonb), whatsapp, updated_at, ordem, ativo,
+    //                valor_inicial (text), preco_max (numeric)
+    // =========================================================================
     let especiaisCache = [];
     async function loadEspeciaisAdmin() {
       const container = document.getElementById('admin-especiais-list');
       const { data, error } = await sb.from('fd7_servicos_especiais').select('*').order('ordem', { ascending: true });
 
       if (error) {
-        container.innerHTML = `<p style="color:#fca5a5;">Erro: ${error.message}</p>`;
+        container.innerHTML = `<p style="color:#fca5a5;">Erro: ${escapeHtml(error.message)}</p>`;
         return;
       }
       if (!data || data.length === 0) {
-        container.innerHTML = `<p style="color:var(--text-muted);">Nenhum serviço especial encontrado. Execute o script supabase-setup.sql primeiro.</p>`;
+        container.innerHTML = `<p style="color:var(--text-muted);">Nenhum serviço especial encontrado em <code>fd7_servicos_especiais</code>.</p>`;
         return;
       }
       especiaisCache = data;
 
       container.innerHTML = data.map(s => {
-        const itensHtml = (s.itens || []).map((it, idx) => {
-          const nomeVal = typeof it === 'object' ? (it.nome || '') : String(it || '');
-          const precoVal = (typeof it === 'object' && it.preco !== null && it.preco !== undefined && it.preco !== '') ? it.preco : '';
+        const sid = escapeHtml(String(s.id));
+        const itensHtml = (Array.isArray(s.itens) ? s.itens : []).map((it, idx) => {
+          const nomeVal = typeof it === 'object' && it !== null ? (it.nome || '') : String(it || '');
+          const precoVal = (typeof it === 'object' && it !== null && it.preco !== null && it.preco !== undefined && it.preco !== '') ? it.preco : '';
           return `
             <div class="micro-row">
-              <input type="text" id="esp-item-nome-${s.id}-${idx}" value="${escapeHtml(nomeVal)}" placeholder="Nome da etapa / micro-serviço" />
-              <input type="number" step="0.01" min="0" id="esp-item-preco-${s.id}-${idx}" value="${escapeHtml(String(precoVal))}" placeholder="Valor R$ (opcional)" title="Valor individual da etapa (deixe em branco se for incluso sem valor próprio)" />
-              <button type="button" class="btn btn-danger" onclick="removeEspecialItem('${s.id}', ${idx})">X</button>
+              <input type="text" id="esp-item-nome-${sid}-${idx}" value="${escapeHtml(nomeVal)}" placeholder="Nome da etapa / micro-serviço" />
+              <input type="number" step="0.01" min="0" id="esp-item-preco-${sid}-${idx}" value="${escapeHtml(String(precoVal))}" placeholder="Valor R$ (opc.)" />
+              <button type="button" class="btn btn-danger" onclick="removeEspecialItem('${sid}', ${idx})">X</button>
             </div>
           `;
         }).join('');
 
         return `
           <div class="card" style="background:#18181c; margin-bottom:14px;">
-            <h3 style="margin-bottom:12px;">${escapeHtml(s.titulo)}</h3>
+            <h3 style="margin-bottom:12px;">${escapeHtml(s.titulo)} <small style="color:var(--text-muted); font-weight:500;">(ID: ${sid})</small></h3>
             <div class="grid-3">
               <div class="field">
                 <label>Título</label>
-                <input type="text" id="esp-titulo-${s.id}" value="${escapeHtml(s.titulo)}" />
+                <input type="text" id="esp-titulo-${sid}" value="${escapeHtml(s.titulo)}" required />
               </div>
               <div class="field">
-                <label>Valor a Partir de / Mínimo (R$)</label>
-                <input type="number" step="0.01" min="0" id="esp-min-${s.id}" value="${s.preco_min || 0}" />
+                <label>Selo (Badge)</label>
+                <input type="text" id="esp-badge-${sid}" value="${escapeHtml(s.badge || '')}" placeholder="Ex: Preço Variável ou Serviço Completo" />
               </div>
               <div class="field">
-                <label>Teto / Máximo (0 = sem limite)</label>
-                <input type="number" step="0.01" min="0" id="esp-max-${s.id}" value="${s.preco_max || 0}" />
+                <label>Preço de Destaque (Texto)</label>
+                <input type="text" id="esp-destaque-${sid}" value="${escapeHtml(s.preco_destaque || '')}" placeholder="Ex: R$ 40,00 – R$ 410,00" />
               </div>
             </div>
+
+            <div class="grid-4">
+              <div class="field">
+                <label>Valor Inicial (Texto)</label>
+                <input type="text" id="esp-val-ini-${sid}" value="${escapeHtml(s.valor_inicial || '')}" placeholder="Ex: 70.00" />
+              </div>
+              <div class="field">
+                <label>Preço Máximo (Numérico)</label>
+                <input type="number" step="0.01" min="0" id="esp-max-${sid}" value="${s.preco_max ?? ''}" placeholder="Vazio = sem teto" />
+              </div>
+              <div class="field">
+                <label>WhatsApp</label>
+                <input type="text" id="esp-wpp-${sid}" value="${escapeHtml(s.whatsapp || '5511989570927')}" />
+              </div>
+              <div class="field">
+                <label>Ordem</label>
+                <input type="number" id="esp-ordem-${sid}" value="${s.ordem ?? 0}" />
+              </div>
+            </div>
+
             <div class="field">
               <label>Subtítulo</label>
-              <input type="text" id="esp-sub-${s.id}" value="${escapeHtml(s.subtitulo || '')}" />
+              <input type="text" id="esp-sub-${sid}" value="${escapeHtml(s.subtitulo || '')}" />
             </div>
+
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="esp-ativo-${sid}" ${s.ativo !== false ? 'checked' : ''} />
+                <span>Serviço Especial Ativo no Site</span>
+              </label>
+            </div>
+
             <div class="field">
               <label>Etapas / Micro-serviços e Valores Individuais (R$)</label>
-              <div id="esp-items-box-${s.id}">${itensHtml}</div>
-              <button type="button" class="btn btn-ghost" style="margin-top:6px; font-size:0.78rem;" onclick="addEspecialItem('${s.id}')">+ Adicionar Etapa com Valor</button>
+              <div id="esp-items-box-${sid}">${itensHtml}</div>
+              <button type="button" class="btn btn-ghost" style="margin-top:6px; font-size:0.78rem;" onclick="addEspecialItem('${sid}')">+ Adicionar Etapa</button>
             </div>
-            <button class="btn btn-red" onclick="saveEspecial('${s.id}')">Salvar ${escapeHtml(s.titulo)}</button>
+            <button class="btn btn-red" onclick="saveEspecial('${sid}')">Salvar ${escapeHtml(s.titulo)}</button>
           </div>
         `;
       }).join('');
     }
 
     window.addEspecialItem = (id) => {
-      const srv = especiaisCache.find(x => x.id === id);
+      const srv = especiaisCache.find(x => String(x.id) === String(id));
       if (!srv) return;
-      srv.itens = srv.itens || [];
+      srv.itens = Array.isArray(srv.itens) ? srv.itens : [];
       srv.itens.push({ nome: '', preco: null });
       loadEspeciaisAdmin();
     };
 
     window.removeEspecialItem = (id, idx) => {
-      const srv = especiaisCache.find(x => x.id === id);
-      if (!srv) return;
+      const srv = especiaisCache.find(x => String(x.id) === String(id));
+      if (!srv || !Array.isArray(srv.itens)) return;
       srv.itens.splice(idx, 1);
       loadEspeciaisAdmin();
     };
 
     window.saveEspecial = async (id) => {
-      const srv = especiaisCache.find(x => x.id === id);
+      const srv = especiaisCache.find(x => String(x.id) === String(id));
       if (!srv) return;
 
-      const newItens = (srv.itens || []).map((_, idx) => {
+      const newItens = (Array.isArray(srv.itens) ? srv.itens : []).map((_, idx) => {
         const nomeEl = document.getElementById(`esp-item-nome-${id}-${idx}`);
         if (!nomeEl) return null;
         const nome = nomeEl.value.trim();
@@ -751,54 +941,197 @@
         return { nome, preco };
       }).filter(Boolean);
 
-      const maxVal = Number(document.getElementById(`esp-max-${id}`).value);
+      const rawMax = document.getElementById(`esp-max-${id}`).value.trim();
+      const precoMaxVal = rawMax !== '' && Number(rawMax) > 0 ? Number(rawMax) : null;
+      const rawValIni = document.getElementById(`esp-val-ini-${id}`).value.trim();
 
       const payload = {
         titulo: document.getElementById(`esp-titulo-${id}`).value.trim(),
-        subtitulo: document.getElementById(`esp-sub-${id}`).value.trim(),
-        preco_min: Number(document.getElementById(`esp-min-${id}`).value),
-        itens: newItens
+        subtitulo: document.getElementById(`esp-sub-${id}`).value.trim() || null,
+        badge: document.getElementById(`esp-badge-${id}`).value.trim() || null,
+        preco_destaque: document.getElementById(`esp-destaque-${id}`).value.trim() || null,
+        valor_inicial: rawValIni !== '' ? rawValIni : null,
+        preco_max: precoMaxVal,
+        whatsapp: document.getElementById(`esp-wpp-${id}`).value.replace(/\D/g, '') || '5511989570927',
+        ordem: Number(document.getElementById(`esp-ordem-${id}`).value) || 0,
+        ativo: document.getElementById(`esp-ativo-${id}`).checked,
+        itens: newItens,
+        updated_at: new Date().toISOString()
       };
-
-      if (Object.prototype.hasOwnProperty.call(srv, 'preco_max')) {
-        payload.preco_max = maxVal > 0 ? maxVal : null;
-      }
 
       const { error } = await sb.from('fd7_servicos_especiais').update(payload).eq('id', id);
       if (error) showToast('Erro ao salvar serviço: ' + error.message, true);
       else {
-        showToast('Serviço especial e etapas atualizados!');
+        showToast('Serviço especial atualizado!');
         loadEspeciaisAdmin();
       }
     };
 
-    // Config
+    // =========================================================================
+    // 4. SERVIÇOS CHAVEIRO & ESTÉTICA (servicos_chaveiro, servicos_estetica)
+    // =========================================================================
+    async function loadServicosExtrasAdmin() {
+      const chavContainer = document.getElementById('admin-chaveiro-list');
+      const estContainer = document.getElementById('admin-estetica-extra-list');
+
+      const [chavRes, estRes] = await Promise.all([
+        sb.from('servicos_chaveiro').select('*').order('ordem', { ascending: true }),
+        sb.from('servicos_estetica').select('*').order('ordem', { ascending: true })
+      ]);
+
+      if (chavRes.error) {
+        chavContainer.innerHTML = `<p style="color:#fca5a5;">Erro: ${escapeHtml(chavRes.error.message)}</p>`;
+      } else if (!chavRes.data || chavRes.data.length === 0) {
+        chavContainer.innerHTML = `<p style="color:var(--text-muted);">Nenhum registro em <code>servicos_chaveiro</code> (o site exibirá os cards padrão embutidos).</p>`;
+      } else {
+        chavContainer.innerHTML = chavRes.data.map(s => `
+          <div class="card" style="background:#18181c;">
+            <div class="grid-3">
+              <div class="field">
+                <label>Título</label>
+                <input type="text" id="chav-titulo-${s.id}" value="${escapeHtml(s.titulo)}" />
+              </div>
+              <div class="field">
+                <label>Ícone</label>
+                <input type="text" id="chav-icone-${s.id}" value="${escapeHtml(s.icone || 'key-round')}" />
+              </div>
+              <div class="field">
+                <label>Ordem</label>
+                <input type="number" id="chav-ordem-${s.id}" value="${s.ordem ?? 0}" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Descrição</label>
+              <textarea id="chav-desc-${s.id}">${escapeHtml(s.descricao || '')}</textarea>
+            </div>
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="chav-vw-${s.id}" ${s.destaque_vw ? 'checked' : ''} />
+                <span>Destaque Linha Volkswagen</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="chav-ativo-${s.id}" ${s.ativo !== false ? 'checked' : ''} />
+                <span>Ativo no Site</span>
+              </label>
+            </div>
+            <button class="btn btn-red" onclick="saveServicoChaveiro('${s.id}')">Salvar Serviço Chaveiro</button>
+          </div>
+        `).join('');
+      }
+
+      if (estRes.error) {
+        estContainer.innerHTML = `<p style="color:#fca5a5;">Erro: ${escapeHtml(estRes.error.message)}</p>`;
+      } else if (!estRes.data || estRes.data.length === 0) {
+        estContainer.innerHTML = `<p style="color:var(--text-muted);">Nenhum registro em <code>servicos_estetica</code> (o site exibirá os cards padrão embutidos).</p>`;
+      } else {
+        estContainer.innerHTML = estRes.data.map(s => `
+          <div class="card" style="background:#18181c;">
+            <div class="grid-4">
+              <div class="field">
+                <label>Título</label>
+                <input type="text" id="estx-titulo-${s.id}" value="${escapeHtml(s.titulo)}" />
+              </div>
+              <div class="field">
+                <label>Tag</label>
+                <input type="text" id="estx-tag-${s.id}" value="${escapeHtml(s.tag || '')}" />
+              </div>
+              <div class="field">
+                <label>Preço (Texto)</label>
+                <input type="text" id="estx-preco-${s.id}" value="${escapeHtml(s.preco_texto || '')}" />
+              </div>
+              <div class="field">
+                <label>Ordem</label>
+                <input type="number" id="estx-ordem-${s.id}" value="${s.ordem ?? 0}" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Descrição</label>
+              <textarea id="estx-desc-${s.id}">${escapeHtml(s.descricao || '')}</textarea>
+            </div>
+            <div class="checkbox-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="estx-ativo-${s.id}" ${s.ativo !== false ? 'checked' : ''} />
+                <span>Ativo no Site</span>
+              </label>
+            </div>
+            <button class="btn btn-red" onclick="saveServicoEstetica('${s.id}')">Salvar Serviço Estética</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    window.saveServicoChaveiro = async (id) => {
+      const payload = {
+        titulo: document.getElementById(`chav-titulo-${id}`).value.trim(),
+        descricao: document.getElementById(`chav-desc-${id}`).value.trim(),
+        icone: document.getElementById(`chav-icone-${id}`).value.trim() || 'key-round',
+        ordem: Number(document.getElementById(`chav-ordem-${id}`).value) || 0,
+        destaque_vw: document.getElementById(`chav-vw-${id}`).checked,
+        ativo: document.getElementById(`chav-ativo-${id}`).checked
+      };
+      const { error } = await sb.from('servicos_chaveiro').update(payload).eq('id', id);
+      if (error) showToast('Erro ao salvar serviço de chaveiro: ' + error.message, true);
+      else showToast('Serviço de chaveiro atualizado!');
+    };
+
+    window.saveServicoEstetica = async (id) => {
+      const payload = {
+        titulo: document.getElementById(`estx-titulo-${id}`).value.trim(),
+        descricao: document.getElementById(`estx-desc-${id}`).value.trim(),
+        tag: document.getElementById(`estx-tag-${id}`).value.trim() || null,
+        preco_texto: document.getElementById(`estx-preco-${id}`).value.trim() || null,
+        ordem: Number(document.getElementById(`estx-ordem-${id}`).value) || 0,
+        ativo: document.getElementById(`estx-ativo-${id}`).checked
+      };
+      const { error } = await sb.from('servicos_estetica').update(payload).eq('id', id);
+      if (error) showToast('Erro ao salvar serviço de estética: ' + error.message, true);
+      else showToast('Serviço avulso de estética atualizado!');
+    };
+
+    // =========================================================================
+    // 5. CONFIGURAÇÕES GERAIS (tabela: configuracoes, id = 1)
+    // Colunas reais: id, whatsapp_chaveiro, whatsapp_estetica_1, whatsapp_estetica_2,
+    //                instagram_url, endereco, cnpj, hero_titulo, hero_imagem_url, atualizado_em
+    // =========================================================================
     async function loadConfigAdmin() {
-      const { data } = await sb.from('fd7_config').select('*').limit(1).maybeSingle();
+      const { data } = await sb.from('configuracoes').select('*').eq('id', 1).maybeSingle();
       if (data) {
-        document.getElementById('cfg-wpp-chaveiro').value = data.wpp_chaveiro || '5511940732831';
-        document.getElementById('cfg-wpp-est1').value = data.wpp_estetica_1 || '5511989570927';
-        document.getElementById('cfg-wpp-est2').value = data.wpp_estetica_2 || '5511947912315';
+        document.getElementById('cfg-wpp-chaveiro').value = data.whatsapp_chaveiro || '5511940732831';
+        document.getElementById('cfg-wpp-est1').value = data.whatsapp_estetica_1 || '5511989570927';
+        document.getElementById('cfg-wpp-est2').value = data.whatsapp_estetica_2 || '5511947912315';
+        document.getElementById('cfg-instagram').value = data.instagram_url || 'https://www.instagram.com/fd7garagem/';
+        document.getElementById('cfg-endereco').value = data.endereco || 'Travessa Bandeira Branca, 126 - São Mateus, São Paulo - SP, 08344-110';
+        document.getElementById('cfg-cnpj').value = data.cnpj || '63.213.695/0001-00';
+        document.getElementById('cfg-hero-titulo').value = data.hero_titulo || 'Rápido, confiável e sempre com você.';
+        document.getElementById('cfg-hero-img').value = data.hero_imagem_url || '';
       }
     }
 
     document.getElementById('config-form').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const heroImgRaw = document.getElementById('cfg-hero-img').value.trim();
       const payload = {
         id: 1,
-        wpp_chaveiro: document.getElementById('cfg-wpp-chaveiro').value.replace(/\D/g, ''),
-        wpp_estetica_1: document.getElementById('cfg-wpp-est1').value.replace(/\D/g, ''),
-        wpp_estetica_2: document.getElementById('cfg-wpp-est2').value.replace(/\D/g, '')
+        whatsapp_chaveiro: document.getElementById('cfg-wpp-chaveiro').value.replace(/\D/g, '') || '5511940732831',
+        whatsapp_estetica_1: document.getElementById('cfg-wpp-est1').value.replace(/\D/g, '') || '5511989570927',
+        whatsapp_estetica_2: document.getElementById('cfg-wpp-est2').value.replace(/\D/g, '') || '5511947912315',
+        instagram_url: document.getElementById('cfg-instagram').value.trim() || 'https://www.instagram.com/fd7garagem/',
+        endereco: document.getElementById('cfg-endereco').value.trim() || 'Travessa Bandeira Branca, 126 - São Mateus, São Paulo - SP, 08344-110',
+        cnpj: document.getElementById('cfg-cnpj').value.trim() || '63.213.695/0001-00',
+        hero_titulo: document.getElementById('cfg-hero-titulo').value.trim() || 'Rápido, confiável e sempre com você.',
+        hero_imagem_url: heroImgRaw !== '' ? heroImgRaw : null,
+        atualizado_em: new Date().toISOString()
       };
-      const { error } = await sb.from('fd7_config').upsert(payload);
-      if (error) showToast('Erro ao salvar contatos: ' + error.message, true);
-      else showToast('Contatos atualizados com sucesso!');
+      const { error } = await sb.from('configuracoes').upsert(payload);
+      if (error) showToast('Erro ao salvar configurações: ' + error.message, true);
+      else showToast('Configurações atualizadas com sucesso!');
     });
 
     function loadAllAdminData() {
       loadVitrineAdmin();
       loadPacotesAdmin();
       loadEspeciaisAdmin();
+      loadServicosExtrasAdmin();
       loadConfigAdmin();
     }
 
